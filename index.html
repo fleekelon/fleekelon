@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>杭州虫洞科技咨询有限公司 · 跨境财税合规咨询</title>
+  <meta name="description" content="杭州虫洞科技咨询有限公司，专注跨境电商财税合规、海外税务筹划与金税四期应对，连接国内经营与全球合规。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0a1628;
+      --ink-soft: #1a2d44;
+      --teal: #0d7377;
+      --teal-bright: #14919b;
+      --mist: #e6eef4;
+      --paper: #f2f6f9;
+      --muted: #5c6d7e;
+      --line: rgba(10, 22, 40, 0.12);
+      --white: #ffffff;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: "Manrope", "Noto Sans SC", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      line-height: 1.7;
+      font-size: 1.05rem;
+      overflow-x: hidden;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    img { display: block; max-width: 100%; height: auto; }
+
+    .wrap {
+      width: min(1120px, calc(100% - 2.5rem));
+      margin-inline: auto;
+    }
+
+    /* —— Nav —— */
+    .nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 40;
+      padding: 1.1rem 0;
+      transition: background 0.4s var(--ease), backdrop-filter 0.4s var(--ease), padding 0.4s var(--ease);
+    }
+
+    .nav.is-scrolled {
+      background: rgba(242, 246, 249, 0.88);
+      backdrop-filter: blur(14px);
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.7rem;
+      font-family: "Noto Serif SC", serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-mark {
+      width: 2rem;
+      height: 2rem;
+      flex-shrink: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.75rem;
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--ink-soft);
+    }
+
+    .nav-links a {
+      position: relative;
+      transition: color 0.25s;
+    }
+
+    .nav-links a:hover { color: var(--teal); }
+
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.55rem 1.1rem;
+      background: var(--ink);
+      color: var(--white);
+      border-radius: 2px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: background 0.25s, transform 0.25s var(--ease);
+    }
+
+    .nav-cta:hover {
+      background: var(--teal);
+      transform: translateY(-1px);
+    }
+
+    .nav-toggle {
+      display: none;
+      width: 2.25rem;
+      height: 2.25rem;
+      border: 0;
+      background: transparent;
+      cursor: pointer;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      height: 2px;
+      width: 100%;
+      background: var(--ink);
+      transition: transform 0.3s var(--ease), opacity 0.3s;
+    }
+
+    /* —— Hero —— */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: grid;
+      align-items: end;
+      color: var(--white);
+      overflow: hidden;
+    }
+
+    .hero-media {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+
+    .hero-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.06);
+      animation: hero-drift 22s var(--ease) infinite alternate;
+    }
+
+    @keyframes hero-drift {
+      from { transform: scale(1.06) translate3d(0, 0, 0); }
+      to { transform: scale(1.12) translate3d(-1.5%, -1%, 0); }
+    }
+
+    .hero-veil {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(105deg, rgba(10, 22, 40, 0.88) 0%, rgba(10, 22, 40, 0.55) 48%, rgba(13, 115, 119, 0.28) 100%),
+        radial-gradient(ellipse 70% 55% at 78% 35%, rgba(20, 145, 155, 0.35), transparent 60%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      padding: 8.5rem 0 4.5rem;
+      width: min(1120px, calc(100% - 2.5rem));
+      margin-inline: auto;
+    }
+
+    .hero-brand {
+      font-family: "Noto Serif SC", serif;
+      font-size: clamp(2.4rem, 6.2vw, 4.4rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: 0.04em;
+      margin-bottom: 1.35rem;
+      max-width: 14ch;
+      opacity: 0;
+      transform: translateY(28px);
+      animation: rise 0.9s var(--ease) 0.15s forwards;
+    }
+
+    .hero-title {
+      font-size: clamp(1.15rem, 2.4vw, 1.55rem);
+      font-weight: 500;
+      line-height: 1.55;
+      max-width: 22em;
+      color: rgba(255, 255, 255, 0.92);
+      margin-bottom: 0.85rem;
+      opacity: 0;
+      transform: translateY(28px);
+      animation: rise 0.9s var(--ease) 0.35s forwards;
+    }
+
+    .hero-lead {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.72);
+      max-width: 32em;
+      margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(28px);
+      animation: rise 0.9s var(--ease) 0.5s forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+      opacity: 0;
+      transform: translateY(28px);
+      animation: rise 0.9s var(--ease) 0.65s forwards;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.9rem 1.45rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 2px;
+      border: 1px solid transparent;
+      transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.25s var(--ease);
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--teal-bright);
+      color: var(--white);
+    }
+
+    .btn-primary:hover { background: #0f7f88; }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.45);
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--white);
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    @keyframes rise {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* —— Shared section —— */
+    section {
+      padding: 5.5rem 0;
+    }
+
+    .eyebrow {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.85rem;
+    }
+
+    .section-title {
+      font-family: "Noto Serif SC", serif;
+      font-size: clamp(1.85rem, 3.5vw, 2.55rem);
+      font-weight: 700;
+      line-height: 1.3;
+      letter-spacing: 0.02em;
+      margin-bottom: 0.85rem;
+    }
+
+    .section-lead {
+      color: var(--muted);
+      max-width: 36em;
+      font-size: 1.05rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+    }
+
+    .reveal.is-in {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* —— Services —— */
+    .services {
+      background:
+        radial-gradient(ellipse 60% 50% at 100% 0%, rgba(20, 145, 155, 0.1), transparent 55%),
+        linear-gradient(180deg, var(--mist) 0%, var(--paper) 100%);
+    }
+
+    .services-head {
+      margin-bottom: 3.25rem;
+    }
+
+    .service-list {
+      display: grid;
+      gap: 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .service-item {
+      display: grid;
+      grid-template-columns: 4.5rem 1fr;
+      gap: 1.25rem;
+      padding: 1.85rem 0;
+      border-bottom: 1px solid var(--line);
+      align-items: start;
+    }
+
+    .service-num {
+      font-family: "Manrope", monospace;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: 0.06em;
+      padding-top: 0.35rem;
+    }
+
+    .service-item h3 {
+      font-family: "Noto Serif SC", serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      margin-bottom: 0.45rem;
+      letter-spacing: 0.02em;
+    }
+
+    .service-item p {
+      color: var(--muted);
+      max-width: 42em;
+      font-size: 0.98rem;
+    }
+
+    /* —— About —— */
+    .about {
+      background: var(--ink);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .about::before {
+      content: "";
+      position: absolute;
+      width: 48rem;
+      height: 48rem;
+      right: -18%;
+      top: -30%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(20, 145, 155, 0.28), transparent 68%);
+      pointer-events: none;
+      animation: portal-pulse 8s ease-in-out infinite;
+    }
+
+    @keyframes portal-pulse {
+      0%, 100% { transform: scale(1); opacity: 0.85; }
+      50% { transform: scale(1.12); opacity: 1; }
+    }
+
+    .about-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    .about .eyebrow { color: var(--teal-bright); }
+
+    .about .section-lead { color: rgba(255, 255, 255, 0.68); }
+
+    .about-copy p + p { margin-top: 1rem; }
+
+    .about-copy p {
+      color: rgba(255, 255, 255, 0.78);
+      font-size: 1.02rem;
+    }
+
+    .about-visual {
+      position: relative;
+      min-height: 22rem;
+      overflow: hidden;
+      border-radius: 2px;
+    }
+
+    .about-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      inset: 0;
+      filter: saturate(0.85) contrast(1.05);
+    }
+
+    .about-visual::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, rgba(13, 115, 119, 0.35), transparent 55%);
+    }
+
+    /* —— Insight —— */
+    .insight {
+      background:
+        linear-gradient(180deg, var(--paper), var(--mist));
+    }
+
+    .insight-panel {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 3rem;
+      align-items: end;
+      padding-top: 0.5rem;
+    }
+
+    .insight-stat {
+      font-family: "Noto Serif SC", serif;
+      font-size: clamp(3.2rem, 8vw, 5.5rem);
+      font-weight: 700;
+      line-height: 0.95;
+      color: var(--teal);
+      letter-spacing: -0.02em;
+    }
+
+    .insight-stat span {
+      display: block;
+      font-size: 1rem;
+      font-family: "Manrope", "Noto Sans SC", sans-serif;
+      font-weight: 500;
+      color: var(--muted);
+      margin-top: 1rem;
+      letter-spacing: 0;
+      line-height: 1.5;
+      max-width: 14em;
+    }
+
+    .insight-body h2 {
+      font-family: "Noto Serif SC", serif;
+      font-size: clamp(1.55rem, 2.8vw, 2rem);
+      margin-bottom: 1rem;
+      line-height: 1.35;
+    }
+
+    .insight-body p {
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .insight-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-weight: 700;
+      color: var(--teal);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.25s, gap 0.25s var(--ease);
+    }
+
+    .insight-link:hover {
+      border-color: var(--teal);
+      gap: 0.7rem;
+    }
+
+    /* —— Contact —— */
+    .contact {
+      background:
+        radial-gradient(ellipse 50% 80% at 0% 100%, rgba(20, 145, 155, 0.12), transparent 50%),
+        var(--white);
+      border-top: 1px solid var(--line);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3.5rem;
+      align-items: start;
+    }
+
+    .contact-list {
+      list-style: none;
+      display: grid;
+      gap: 1.35rem;
+      margin-top: 2rem;
+    }
+
+    .contact-list li {
+      display: grid;
+      gap: 0.2rem;
+    }
+
+    .contact-list dt,
+    .contact-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .contact-list dd,
+    .contact-value {
+      font-size: 1.15rem;
+      font-weight: 600;
+    }
+
+    .contact-form {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .contact-form label {
+      display: grid;
+      gap: 0.4rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--ink-soft);
+    }
+
+    .contact-form input,
+    .contact-form textarea,
+    .contact-form select {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      background: var(--paper);
+      font: inherit;
+      color: var(--ink);
+      transition: border-color 0.25s, background 0.25s;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus,
+    .contact-form select:focus {
+      outline: none;
+      border-color: var(--teal);
+      background: var(--white);
+    }
+
+    .contact-form textarea { min-height: 8rem; resize: vertical; }
+
+    .form-note {
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin-top: 0.35rem;
+    }
+
+    .form-success {
+      display: none;
+      padding: 1.25rem 0;
+      color: var(--teal);
+      font-weight: 600;
+    }
+
+    .form-success.is-visible { display: block; }
+
+    /* —— Footer —— */
+    .footer {
+      background: var(--ink);
+      color: rgba(255, 255, 255, 0.65);
+      padding: 2.25rem 0;
+      font-size: 0.9rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: center;
+    }
+
+    .footer strong {
+      color: var(--white);
+      font-family: "Noto Serif SC", serif;
+      font-weight: 700;
+    }
+
+    /* —— Mobile —— */
+    @media (max-width: 860px) {
+      .nav-toggle { display: flex; }
+
+      .nav-links {
+        position: fixed;
+        inset: 0 0 auto;
+        top: 0;
+        padding: 5rem 1.5rem 1.5rem;
+        background: rgba(242, 246, 249, 0.97);
+        backdrop-filter: blur(16px);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.25rem;
+        transform: translateY(-110%);
+        transition: transform 0.4s var(--ease);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .nav-links.is-open { transform: translateY(0); }
+
+      .about-grid,
+      .insight-panel,
+      .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .about-visual {
+        min-height: 16rem;
+        order: -1;
+      }
+
+      .hero-content { padding: 7.5rem 0 3.5rem; }
+
+      .service-item {
+        grid-template-columns: 3rem 1fr;
+        gap: 0.85rem;
+      }
+
+      section { padding: 4rem 0; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav" id="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#top" aria-label="杭州虫洞科技咨询有限公司">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <circle cx="16" cy="16" r="14" fill="none" stroke="#0d7377" stroke-width="1.5"/>
+          <ellipse cx="16" cy="16" rx="14" ry="5.5" fill="none" stroke="#14919b" stroke-width="1.2" transform="rotate(-28 16 16)"/>
+          <circle cx="16" cy="16" r="3.2" fill="#0d7377"/>
+        </svg>
+        <span>虫洞科技</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="打开菜单" aria-expanded="false">
+        <span></span><span></span>
+      </button>
+      <nav class="nav-links" id="navLinks">
+        <a href="#services">服务</a>
+        <a href="#about">关于</a>
+        <a href="#insight">洞察</a>
+        <a href="#contact" class="nav-cta">预约咨询</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-label="首页主视觉">
+      <div class="hero-media" aria-hidden="true">
+        <img src="assets/hero-logistics.jpg" alt="" width="1920" height="1280">
+        <div class="hero-veil"></div>
+      </div>
+      <div class="hero-content">
+        <p class="hero-brand">杭州虫洞科技咨询有限公司</p>
+        <h1 class="hero-title">连接跨境经营与全球合规</h1>
+        <p class="hero-lead">面向跨境电商与出海企业，提供财税合规、海外税务筹划与政策落地咨询，把复杂规则变成可执行的路径。</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#contact">预约咨询</a>
+          <a class="btn btn-ghost" href="#services">了解服务</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="services" id="services">
+      <div class="wrap">
+        <div class="services-head reveal">
+          <p class="eyebrow">Services</p>
+          <h2 class="section-title">我们做什么</h2>
+          <p class="section-lead">围绕跨境电商财税全链路，帮助企业在强监管与多市场规则下稳妥经营。</p>
+        </div>
+        <div class="service-list">
+          <article class="service-item reveal">
+            <span class="service-num">01</span>
+            <div>
+              <h3>跨境财税合规</h3>
+              <p>出口退税、海关与税务协同、账务规范与风险排查，建立可审计、可复盘的合规体系。</p>
+            </div>
+          </article>
+          <article class="service-item reveal">
+            <span class="service-num">02</span>
+            <div>
+              <h3>海外税务筹划</h3>
+              <p>覆盖欧盟 VAT、英国与美国销售税等关键市场规则，协助架构设计、注册申报与持续合规。</p>
+            </div>
+          </article>
+          <article class="service-item reveal">
+            <span class="service-num">03</span>
+            <div>
+              <h3>金税四期应对</h3>
+              <p>对照以数治税要求，梳理数据口径、发票与资金流一致性，提前识别查账征收下的风险点。</p>
+            </div>
+          </article>
+          <article class="service-item reveal">
+            <span class="service-num">04</span>
+            <div>
+              <h3>财税团队赋能</h3>
+              <p>面向财务与合规岗位提供制度梳理、流程培训与岗位能力地图，缓解人才缺口与能力错配。</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <div class="wrap about-grid">
+        <div class="about-copy reveal">
+          <p class="eyebrow">About</p>
+          <h2 class="section-title">以「虫洞」连接两端</h2>
+          <p class="section-lead" style="margin-bottom: 1.25rem;">国内经营与海外规则之间，往往隔着信息不对称与执行落差。我们做的，是把两端接通。</p>
+          <p>杭州虫洞科技咨询有限公司立足杭州，服务粤浙闽苏等跨境产业集聚带客户。团队关注海关、税务、平台规则与目的国政策的交叉地带，用可落地的方案替代空泛建议。</p>
+          <p>在金税四期全面落地、海外 VAT 与销售税趋严的背景下，合规已不是可选项。我们帮助企业把政策变化翻译成组织动作、数据口径与日常流程。</p>
+        </div>
+        <div class="about-visual reveal" aria-hidden="true">
+          <img src="assets/office.jpg" alt="" width="1600" height="1067">
+        </div>
+      </div>
+    </section>
+
+    <section class="insight" id="insight">
+      <div class="wrap insight-panel">
+        <div class="reveal">
+          <p class="eyebrow">Insight</p>
+          <p class="insight-stat">2.84<span>万亿元 · 2025年中国跨境电商进出口规模</span></p>
+        </div>
+        <div class="insight-body reveal">
+          <h2>市场在增长，合规门槛也在抬升</h2>
+          <p>行业规模创历史新高的同时，金税四期、海外 VAT、美国免税规则变化等多重政策叠加，跨境财税人才与专业服务需求持续扩大。我们把一线政策与实操经验沉淀为可咨询、可执行的服务能力。</p>
+          <a class="insight-link" href="#contact">获取行业交流 →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="wrap contact-grid">
+        <div class="reveal">
+          <p class="eyebrow">Contact</p>
+          <h2 class="section-title">聊聊你的合规课题</h2>
+          <p class="section-lead">留下企业与需求，我们会在一个工作日内与你联系。</p>
+          <ul class="contact-list">
+            <li>
+              <span class="contact-label">公司</span>
+              <span class="contact-value">杭州虫洞科技咨询有限公司</span>
+            </li>
+            <li>
+              <span class="contact-label">所在地</span>
+              <span class="contact-value">浙江省杭州市</span>
+            </li>
+            <li>
+              <span class="contact-label">邮箱</span>
+              <span class="contact-value">hello@wormhole-hz.com</span>
+            </li>
+          </ul>
+        </div>
+        <form class="contact-form reveal" id="contactForm">
+          <label>
+            姓名
+            <input type="text" name="name" required autocomplete="name" placeholder="怎么称呼您">
+          </label>
+          <label>
+            企业名称
+            <input type="text" name="company" required autocomplete="organization" placeholder="公司或团队名称">
+          </label>
+          <label>
+            联系方式
+            <input type="text" name="contact" required placeholder="手机或邮箱">
+          </label>
+          <label>
+            咨询方向
+            <select name="topic" required>
+              <option value="" disabled selected>请选择</option>
+              <option>跨境财税合规</option>
+              <option>海外税务筹划</option>
+              <option>金税四期应对</option>
+              <option>财税团队赋能</option>
+              <option>其他</option>
+            </select>
+          </label>
+          <label>
+            需求简述
+            <textarea name="message" placeholder="简单描述业务场景与希望解决的问题"></textarea>
+          </label>
+          <button type="submit" class="btn btn-primary" style="width: fit-content;">提交咨询</button>
+          <p class="form-note">本页为展示站演示表单，提交后仅在本页确认，不会上传数据。</p>
+          <p class="form-success" id="formSuccess" role="status">已收到，我们会尽快与您联系。</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <p><strong>杭州虫洞科技咨询有限公司</strong></p>
+      <p>© 2026 Wormhole Tech Consulting. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById("nav");
+    const navToggle = document.getElementById("navToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    const onScroll = () => {
+      nav.classList.toggle("is-scrolled", window.scrollY > 24);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    navToggle.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("is-open");
+      navToggle.setAttribute("aria-expanded", String(open));
+    });
+
+    navLinks.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("is-open");
+        navToggle.setAttribute("aria-expanded", "false");
+      });
+    });
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-in");
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.16, rootMargin: "0px 0px -8% 0px" }
+    );
+    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+    const form = document.getElementById("contactForm");
+    const success = document.getElementById("formSuccess");
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      success.classList.add("is-visible");
+      form.reset();
+    });
+  </script>
+</body>
+</html>
