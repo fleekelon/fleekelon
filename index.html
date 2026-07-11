@@ -418,67 +418,94 @@
       background: linear-gradient(160deg, rgba(13, 115, 119, 0.35), transparent 55%);
     }
 
-    /* —— Insight —— */
-    .insight {
+    /* —— Report —— */
+    .report {
       background:
+        radial-gradient(ellipse 55% 45% at 0% 0%, rgba(20, 145, 155, 0.1), transparent 55%),
         linear-gradient(180deg, var(--paper), var(--mist));
     }
 
-    .insight-panel {
+    .report-grid {
       display: grid;
-      grid-template-columns: 1fr 1.15fr;
+      grid-template-columns: 0.85fr 1.15fr;
       gap: 3rem;
-      align-items: end;
-      padding-top: 0.5rem;
+      align-items: start;
     }
 
-    .insight-stat {
-      font-family: "Noto Serif SC", serif;
-      font-size: clamp(3.2rem, 8vw, 5.5rem);
-      font-weight: 700;
-      line-height: 0.95;
-      color: var(--teal);
-      letter-spacing: -0.02em;
+    .report-cover {
+      position: relative;
+      overflow: hidden;
+      border-radius: 2px;
+      box-shadow: 0 18px 40px rgba(10, 22, 40, 0.12);
+      background: var(--ink);
     }
 
-    .insight-stat span {
+    .report-cover img {
+      width: 100%;
+      height: auto;
       display: block;
-      font-size: 1rem;
-      font-family: "Manrope", "Noto Sans SC", sans-serif;
+    }
+
+    .report-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem 1.25rem;
+      margin: 1.1rem 0 1.5rem;
+      color: var(--muted);
+      font-size: 0.92rem;
       font-weight: 500;
-      color: var(--muted);
-      margin-top: 1rem;
-      letter-spacing: 0;
-      line-height: 1.5;
-      max-width: 14em;
     }
 
-    .insight-body h2 {
-      font-family: "Noto Serif SC", serif;
-      font-size: clamp(1.55rem, 2.8vw, 2rem);
-      margin-bottom: 1rem;
-      line-height: 1.35;
-    }
-
-    .insight-body p {
-      color: var(--muted);
-      margin-bottom: 1.5rem;
-    }
-
-    .insight-link {
+    .report-meta span {
       display: inline-flex;
       align-items: center;
-      gap: 0.45rem;
-      font-weight: 700;
-      color: var(--teal);
-      border-bottom: 1px solid transparent;
-      transition: border-color 0.25s, gap 0.25s var(--ease);
+      gap: 0.35rem;
     }
 
-    .insight-link:hover {
-      border-color: var(--teal);
-      gap: 0.7rem;
+    .report-meta span::before {
+      content: "";
+      width: 0.35rem;
+      height: 0.35rem;
+      border-radius: 50%;
+      background: var(--teal);
     }
+
+    .chapter-list {
+      list-style: none;
+      border-top: 1px solid var(--line);
+      margin: 1.5rem 0 2rem;
+    }
+
+    .chapter-list li {
+      display: grid;
+      grid-template-columns: 2.2rem 1fr;
+      gap: 0.75rem;
+      padding: 0.7rem 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+    }
+
+    .chapter-list strong {
+      color: var(--teal);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      padding-top: 0.15rem;
+    }
+
+    .report-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem;
+    }
+
+    .btn-secondary {
+      background: var(--ink);
+      color: var(--white);
+    }
+
+    .btn-secondary:hover { background: var(--ink-soft); }
 
     /* —— Contact —— */
     .contact {
@@ -617,11 +644,13 @@
       .nav-links.is-open { transform: translateY(0); }
 
       .about-grid,
-      .insight-panel,
+      .report-grid,
       .contact-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
       }
+
+      .report-cover { max-width: 22rem; }
 
       .about-visual {
         min-height: 16rem;
@@ -656,7 +685,7 @@
       <nav class="nav-links" id="navLinks">
         <a href="#services">服务</a>
         <a href="#about">关于</a>
-        <a href="#insight">洞察</a>
+        <a href="#report">报告</a>
         <a href="#contact" class="nav-cta">预约咨询</a>
       </nav>
     </div>
@@ -734,16 +763,33 @@
       </div>
     </section>
 
-    <section class="insight" id="insight">
-      <div class="wrap insight-panel">
-        <div class="reveal">
-          <p class="eyebrow">Insight</p>
-          <p class="insight-stat">2.84<span>万亿元 · 2025年中国跨境电商进出口规模</span></p>
+    <section class="report" id="report">
+      <div class="wrap report-grid">
+        <div class="report-cover reveal">
+          <img src="assets/reports/report-cover.png" alt="跨境电商财税报告从业者版封面" width="595" height="842">
         </div>
-        <div class="insight-body reveal">
-          <h2>市场在增长，合规门槛也在抬升</h2>
-          <p>行业规模创历史新高的同时，金税四期、海外 VAT、美国免税规则变化等多重政策叠加，跨境财税人才与专业服务需求持续扩大。我们把一线政策与实操经验沉淀为可咨询、可执行的服务能力。</p>
-          <a class="insight-link" href="#contact">获取行业交流 →</a>
+        <div class="reveal">
+          <p class="eyebrow">Research</p>
+          <h2 class="section-title">跨境电商财税报告<br>从业者版</h2>
+          <p class="section-lead">合规实操全流程指南。不讲空话，每一节都能落地——从注册选址、通关模式、出口退税，到金税四期与海外合规。</p>
+          <div class="report-meta">
+            <span>V2.0 · 2026年6月</span>
+            <span>11章 + 附录</span>
+            <span>22页完整 PDF</span>
+          </div>
+          <ol class="chapter-list">
+            <li><strong>01</strong><span>创业准备篇——财税合规启动清单</span></li>
+            <li><strong>02</strong><span>通关实操篇——四种模式怎么选、怎么报</span></li>
+            <li><strong>03</strong><span>退税赚钱篇——出口退税全流程实操</span></li>
+            <li><strong>04</strong><span>综试区红利篇——无票免税与核定征收</span></li>
+            <li><strong>05</strong><span>发票与增值税篇——采购、开票、申报</span></li>
+            <li><strong>08</strong><span>金税四期应对篇——企业经得起查吗</span></li>
+            <li><strong>09</strong><span>海外合规篇——美 / 欧 / 日 / 东南亚</span></li>
+          </ol>
+          <div class="report-actions">
+            <a class="btn btn-primary" href="report.html">在线阅读</a>
+            <a class="btn btn-secondary" href="assets/reports/cross-border-tax-report-practitioner.pdf" download="跨境电商财税报告-从业者版.pdf">下载 PDF</a>
+          </div>
         </div>
       </div>
     </section>
@@ -790,6 +836,7 @@
               <option>海外税务筹划</option>
               <option>金税四期应对</option>
               <option>财税团队赋能</option>
+              <option>获取从业者报告</option>
               <option>其他</option>
             </select>
           </label>

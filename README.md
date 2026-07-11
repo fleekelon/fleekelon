@@ -14,5 +14,6 @@ python3 -m http.server 8080
 
 ## 结构
 
-- `index.html` — 单页官网（首页、服务、关于、洞察、联系）
-- `assets/` — 主视觉与配图
+- `index.html` — 单页官网（首页、服务、关于、报告、联系）
+- `report.html` — 嵌入《跨境电商财税报告·从业者版》在线阅读
+- `assets/` — 主视觉、配图与报告 PDF
