@@ -47,7 +47,7 @@ export function Nav() {
           </div>
           <a
             href="#reserve"
-            className="ml-3 rounded-full bg-white px-5 py-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-black transition hover:bg-white/90"
+            className="ml-3 inline-flex items-center justify-center rounded-full bg-[#f5f5f5] px-5 py-2.5 text-[11px] font-semibold uppercase tracking-[0.18em] text-black transition hover:bg-white"
           >
             Reserve
           </a>

@@ -8,9 +8,9 @@ import { EmailForm } from './components/EmailForm'
 gsap.registerPlugin(ScrollTrigger)
 
 const CABIN_IMAGE =
-  'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1800&q=80'
+  'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1800&q=80'
 const NIGHT_ROAD =
-  'https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?auto=format&fit=crop&w=1800&q=80'
+  'https://images.unsplash.com/photo-1542282088-fe8426682b8f?auto=format&fit=crop&w=1800&q=80'
 
 function LogoMark({ className = '' }: { className?: string }) {
   return (
@@ -107,13 +107,13 @@ export default function App() {
         <ParticleWave />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black" />
 
-        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-between px-5 pb-10 pt-28 md:px-8 md:pb-14 md:pt-32">
-          <div className="flex flex-1 flex-col justify-center gap-10 md:flex-row md:items-end md:justify-between">
-            <div className="max-w-md" data-hero>
-              <p className="mb-5 max-w-xs text-sm leading-relaxed text-white/65 md:text-[15px]">
+        <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-between px-5 pb-10 pt-28 md:px-8 md:pb-16 md:pt-32">
+          <div className="grid flex-1 grid-cols-1 items-center gap-8 md:grid-cols-12">
+            <div className="md:col-span-5" data-hero>
+              <p className="max-w-[18rem] text-sm leading-relaxed text-white/65 md:text-[15px]">
                 An AI-driven vehicle that reads the road before you do.
               </p>
-              <span className="inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.28em] text-white/40">
+              <span className="mt-5 inline-flex items-center gap-2 text-[10px] uppercase tracking-[0.28em] text-white/40">
                 <span className="h-1.5 w-1.5 animate-[pulse-dot_2s_ease-in-out_infinite] rounded-full bg-white" />
                 Neural stack online
               </span>
@@ -121,7 +121,7 @@ export default function App() {
 
             <h1
               data-hero
-              className="headline max-w-[10ch] text-right text-[clamp(2.4rem,7vw,5.6rem)] text-white md:self-center"
+              className="headline text-left text-[clamp(2.6rem,8vw,5.8rem)] text-white md:col-span-7 md:text-right"
             >
               Autonomy,
               <br />
@@ -129,7 +129,7 @@ export default function App() {
             </h1>
           </div>
 
-          <div className="mt-12 md:mt-16" data-hero>
+          <div className="mt-10 md:mt-8" data-hero>
             <EmailForm buttonLabel="Send" />
           </div>
         </div>

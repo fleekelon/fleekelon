@@ -64,19 +64,19 @@ export function ParticleWave({ className = '' }: ParticleWaveProps) {
         const nx = p.ox / width
         const ny = p.oy / height
         const wave =
-          Math.sin(nx * 7.5 + t * 1.4) * 28 +
-          Math.cos(ny * 9.2 - t * 1.1) * 22 +
-          Math.sin((nx + ny) * 6 + t * 0.8) * 16
+          Math.sin(nx * 8.2 + t * 1.55) * 42 +
+          Math.cos(ny * 10.4 - t * 1.2) * 30 +
+          Math.sin((nx + ny) * 5.5 + t * 0.9) * 20
 
-        const depth = 1 + Math.sin(nx * 4 + t) * 0.08
+        const depth = 1 + Math.sin(nx * 4 + t) * 0.1
         const x = cx + p.ox * depth
-        const y = cy + p.oy * 0.85 + wave
+        const y = cy + p.oy * 0.82 + wave
 
-        const alpha = 0.18 + ((wave + 40) / 90) * 0.55
-        const size = 1.1 + ((wave + 40) / 90) * 1.6
+        const alpha = 0.22 + ((wave + 55) / 110) * 0.65
+        const size = 1.25 + ((wave + 55) / 110) * 2.1
 
         ctx.beginPath()
-        ctx.fillStyle = `rgba(245,245,245,${Math.max(0.08, Math.min(0.85, alpha))})`
+        ctx.fillStyle = `rgba(245,245,245,${Math.max(0.12, Math.min(0.95, alpha))})`
         ctx.arc(x, y, size, 0, Math.PI * 2)
         ctx.fill()
       }
