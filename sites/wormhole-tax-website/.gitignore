@@ -1,0 +1,5 @@
+.netlify/
+site-standalone.html
+.DS_Store
+Thumbs.db
+*.log

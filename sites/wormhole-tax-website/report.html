@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>跨境电商财税报告 · 从业者版 | 杭州虫洞科技咨询有限公司</title>
+  <meta name="description" content="跨境电商财税报告从业者版：合规实操全流程指南，由杭州虫洞科技咨询有限公司整理发布。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0a1628;
+      --ink-soft: #1a2d44;
+      --teal: #0d7377;
+      --teal-bright: #14919b;
+      --mist: #e6eef4;
+      --paper: #f2f6f9;
+      --muted: #5c6d7e;
+      --line: rgba(10, 22, 40, 0.12);
+      --white: #ffffff;
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Manrope", "Noto Sans SC", sans-serif;
+      color: var(--ink);
+      background: var(--paper);
+      min-height: 100svh;
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      width: min(1120px, calc(100% - 2.5rem));
+      margin-inline: auto;
+    }
+
+    .topbar {
+      background: rgba(242, 246, 249, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+      padding: 0.9rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-family: "Noto Serif SC", serif;
+      font-weight: 700;
+    }
+
+    .brand-mark { width: 1.75rem; height: 1.75rem; }
+
+    .top-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.65rem 1.1rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 2px;
+      border: 1px solid transparent;
+      transition: background 0.25s, transform 0.25s var(--ease);
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      background: var(--teal-bright);
+      color: var(--white);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      border-color: var(--line);
+      color: var(--ink);
+    }
+
+    .intro {
+      padding: 2rem 0 1.25rem;
+      background:
+        radial-gradient(ellipse 50% 80% at 100% 0%, rgba(20, 145, 155, 0.12), transparent 55%),
+        var(--mist);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .intro h1 {
+      font-family: "Noto Serif SC", serif;
+      font-size: clamp(1.55rem, 3vw, 2.1rem);
+      line-height: 1.3;
+      margin-bottom: 0.55rem;
+    }
+
+    .intro p {
+      color: var(--muted);
+      max-width: 40em;
+      font-size: 0.98rem;
+    }
+
+    .viewer-shell {
+      padding: 1.25rem 0 2rem;
+      min-height: 0;
+    }
+
+    .viewer {
+      width: min(1120px, calc(100% - 2.5rem));
+      margin-inline: auto;
+      height: min(82vh, 980px);
+      min-height: 28rem;
+      border: 1px solid var(--line);
+      border-radius: 2px;
+      overflow: hidden;
+      background: var(--white);
+    }
+
+    .viewer iframe,
+    .viewer object,
+    .viewer embed {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    .fallback {
+      padding: 2rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .fallback a {
+      color: var(--teal);
+      font-weight: 700;
+      border-bottom: 1px solid currentColor;
+    }
+
+    .footer {
+      background: var(--ink);
+      color: rgba(255, 255, 255, 0.65);
+      padding: 1.5rem 0;
+      font-size: 0.88rem;
+    }
+
+    .footer strong {
+      color: var(--white);
+      font-family: "Noto Serif SC", serif;
+    }
+
+    @media (max-width: 720px) {
+      .viewer {
+        height: 70vh;
+        min-height: 22rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap topbar-inner">
+      <a class="brand" href="index.html">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true">
+          <circle cx="16" cy="16" r="14" fill="none" stroke="#0d7377" stroke-width="1.5"/>
+          <ellipse cx="16" cy="16" rx="14" ry="5.5" fill="none" stroke="#14919b" stroke-width="1.2" transform="rotate(-28 16 16)"/>
+          <circle cx="16" cy="16" r="3.2" fill="#0d7377"/>
+        </svg>
+        <span>虫洞科技</span>
+      </a>
+      <div class="top-actions">
+        <a class="btn btn-ghost" href="index.html">返回首页</a>
+        <a class="btn btn-primary" href="assets/reports/cross-border-tax-report-practitioner.pdf" download="跨境电商财税报告-从业者版.pdf">下载 PDF</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="intro">
+    <div class="wrap">
+      <h1>跨境电商财税报告 · 从业者版</h1>
+      <p>合规实操全流程指南 · V2.0 · 2026年6月。由杭州虫洞科技咨询有限公司整理嵌入官网，可在线翻阅或下载完整 PDF。</p>
+    </div>
+  </section>
+
+  <section class="viewer-shell">
+    <div class="viewer">
+      <iframe
+        title="跨境电商财税报告从业者版 PDF"
+        src="assets/reports/cross-border-tax-report-practitioner.pdf#view=FitH"
+      ></iframe>
+      <noscript>
+        <div class="fallback">
+          请启用 JavaScript，或
+          <a href="assets/reports/cross-border-tax-report-practitioner.pdf">直接打开 PDF</a>。
+        </div>
+      </noscript>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="wrap">
+      <p><strong>杭州虫洞科技咨询有限公司</strong> · 跨境电商财税报告 · 从业者版</p>
+    </div>
+  </footer>
+</body>
+</html>

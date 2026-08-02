@@ -3,3 +3,6 @@ coverage
 node_modules
 package-lock.json
 *.pdf
+sites/**/*.html
+sites/**/*.jpg
+sites/**/*.png
