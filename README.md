@@ -58,7 +58,7 @@ More detail: [docs/getting-started.md](docs/getting-started.md) · [docs/archite
 
 ## Links
 
-- [Personal site (local preview)](sites/fleekelon/)
+- [Personal site](https://fleekelon.github.io/fleekelon/)
 - [Wormhole tax website](https://github.com/fleekelon/wormhole-tax-website)
 - [This toolkit](https://github.com/fleekelon/fleekelon)
 

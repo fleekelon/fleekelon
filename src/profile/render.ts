@@ -123,8 +123,8 @@ export const defaultProfileInput = {
   ],
   links: [
     {
-      label: "Personal site (local preview)",
-      url: "sites/fleekelon/",
+      label: "Personal site",
+      url: "https://fleekelon.github.io/fleekelon/",
     },
     {
       label: "Wormhole tax website",

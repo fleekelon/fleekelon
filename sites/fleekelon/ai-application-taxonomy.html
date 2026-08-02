@@ -39,10 +39,10 @@
 <table><thead><tr><th>层级</th><th>含义</th><th>典型形态</th></tr></thead><tbody><tr><td><strong>Assist</strong></td><td>人主控，AI 补全片段</td><td>补全、摘要、翻译、单次问答</td></tr><tr><td><strong>Copilot</strong></td><td>人定目标，AI 起草与建议，人确认后执行</td><td>IDE 助手、客服建议、报表草稿</td></tr><tr><td><strong>Agent</strong></td><td>在授权范围内多步调用工具，关键节点仍需人闸门</td><td>带审批的工单代理、调研+填表</td></tr><tr><td><strong>Autonomous workflow</strong></td><td>端到端流程在规则与监控下自动跑，人管例外</td><td>夜间对账、库存预警触发补货（在合规边界内）</td></tr></tbody></table>
 <p>提问句：失败时谁背锅？若答案永远是「人立刻重做」，多半还在 Assist/Copilot；若系统能跨系统改状态，才进入 Agent 以上。</p>
 <h2>2. 按价值捕获（护城河从哪来）</h2>
-<ul><li><strong>Tooling</strong>：卖调用/席位/插件，切换成本低，拼模型质量与 UX。  </li><li><strong>Data moat</strong>：工作流沉淀专有数据/反馈，使下一轮准确率或成本优势可复利。  </li><li><strong>Workflow lock-in</strong>：嵌入采购、审批、关务、财税等刚需链路，替换等于重做流程。  </li><li><strong>Regulated vertical</strong>：牌照、审计轨迹、属地合规决定能否售卖（医疗、金融、跨境税务等）。</li></ul>
+<ul><li><strong>Tooling</strong>：卖调用/席位/插件，切换成本低，拼模型质量与 UX。</li><li><strong>Data moat</strong>：工作流沉淀专有数据/反馈，使下一轮准确率或成本优势可复利。</li><li><strong>Workflow lock-in</strong>：嵌入采购、审批、关务、财税等刚需链路，替换等于重做流程。</li><li><strong>Regulated vertical</strong>：牌照、审计轨迹、属地合规决定能否售卖（医疗、金融、跨境税务等）。</li></ul>
 <p>多数早期产品停在 Tooling；谈「壁垒」时，要能指出数据、工作流或监管三者至少占一条。</p>
 <h2>3. 判断层业务 vs 执行层工具</h2>
-<ul><li><strong>执行层工具</strong>：把已知步骤做得更快更便宜（写邮件、抠图、出表、跑脚本）。AI 供给膨胀时，单价与差异化最容易被压。  </li><li><strong>判断层业务</strong>：决定「对谁、何时、做什么、不做什么」——风险偏好、客户选型、合规边界、定价与例外处理。可以 <strong>消费</strong> 执行层工具，但收费点在判断结果、责任承担与可审计决策，而非 token。</li></ul>
+<ul><li><strong>执行层工具</strong>：把已知步骤做得更快更便宜（写邮件、抠图、出表、跑脚本）。AI 供给膨胀时，单价与差异化最容易被压。</li><li><strong>判断层业务</strong>：决定「对谁、何时、做什么、不做什么」——风险偏好、客户选型、合规边界、定价与例外处理。可以 <strong>消费</strong> 执行层工具，但收费点在判断结果、责任承担与可审计决策，而非 token。</li></ul>
 <p>客户对话用法：先标自动化深度，再标价值捕获，最后问「你们卖的是执行加速，还是判断与责任？」若产品自称 Agent，却只按席位卖通用写作，位置其实是 Copilot + Tooling。</p>
 <h2>4. 与六层地图的咬合（概念层）</h2>
 <p>labs（模型研究）与 compute/memory/cloud 决定执行层工具的成本曲线；physical（机器人、设备、边缘）决定 Agent 能否碰真实世界；software 应用则在上述约束下争夺工作流入口。分类草图不预测哪一层「更赚钱」，只避免把「用了 GPT」误判为「建成了判断层业务」。</p>

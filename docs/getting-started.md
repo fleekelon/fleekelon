@@ -65,10 +65,22 @@ npm run fleekelon -- site build
 5. Optionally rebuild the site: `npm run site:build`.
 6. Optionally sync the GitHub profile README: `npm run profile:write`.
 
-## Preview the personal site
+## Preview / publish the personal site
+
+Local:
 
 ```bash
 npm run site:build
 cd sites/fleekelon
 python3 -m http.server 4173
 ```
+
+Stable public URL (GitHub Pages):
+
+1. Open repo **Settings → Pages**
+2. Build and deployment → Source: **Deploy from a branch**
+3. Branch: **`gh-pages`** / folder **`/` (root)** → Save  
+   (or Source: **GitHub Actions** after merging the Pages workflow)
+4. Site will be at **https://fleekelon.github.io/fleekelon/**
+
+The `gh-pages` branch is already published from `sites/fleekelon`. Pushing to `main` with `.github/workflows/pages.yml` keeps Actions deploys in sync once Pages source is set to GitHub Actions.
