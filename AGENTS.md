@@ -23,4 +23,5 @@ npm run check
 
 - Keep engineering tooling and content catalog here.
 - Do not merge unrelated marketing demos (for example AERA) into the repo root.
-- Wormhole corporate website work belongs in `fleekelon/wormhole-tax-website`.
+- Wormhole corporate website source-of-truth copy lives in `sites/wormhole-tax-website/`.
+  Sync it to `fleekelon/wormhole-tax-website` when that repo is writable.
