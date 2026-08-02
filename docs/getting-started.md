@@ -54,6 +54,10 @@ npm run fleekelon -- content validate
 npm run fleekelon -- profile render
 npm run fleekelon -- profile write
 npm run fleekelon -- site build
+npm run fleekelon -- invest thesis new cloud-handoff --title="Cloud handoff"
+npm run fleekelon -- invest decision new trim-memory --title="Trim memory beta"
+npm run fleekelon -- invest prediction new nvda-guide --domain=semiconductors --settle-by=2026-08-27
+npm run fleekelon -- invest list
 ```
 
 ## Add a new article / note

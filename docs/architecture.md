@@ -15,12 +15,14 @@ src/cli/                     argument parsing and command routing
 src/content/                 catalog, validation, search, stats, digest
 src/profile/                 GitHub profile README renderer
 src/site/                    personal site builder + markdown renderer
+src/invest/                  thesis / decision / prediction scaffolds
 src/lib/                     result / fs / logger helpers
 content/articles/            long-form writing
-content/notes/               shorter field notes
-content/theses/              investment / strategy theses (optional)
+content/notes/               shorter field notes (+ decision/prediction memos)
+content/theses/              investment / strategy theses
 content/chat-export/         archived conversations
 sites/fleekelon/             generated personal site
+sites/aera-landing/          AERA marketing demo (staging only)
 ```
 
 ## Command flow

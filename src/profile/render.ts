@@ -61,8 +61,9 @@ export function renderProfileReadme(input: ProfileInput): string {
 
 \`fleekelon\` is also a TypeScript personal toolkit with:
 
-- CLI commands: \`doctor\`, \`content\`, \`profile\`, \`site\`, \`greet\`
+- CLI commands: \`doctor\`, \`content\`, \`invest\`, \`profile\`, \`site\`, \`greet\`
 - Content catalog + validation for articles / notes / theses / chat exports
+- Investing workflows: thesis / decision memo / prediction ledger
 - Search, tag index, stats, and digest generation
 - GitHub profile README renderer (\`profile render\` / \`profile write\`)
 - Static personal site builder (\`site build\`)
@@ -84,6 +85,7 @@ npm run fleekelon -- help
 | \`npm run profile:render\`   | Render profile README markdown                      |
 | \`npm run profile:write\`    | Sync rendered markdown into \`README.md\`             |
 | \`npm run site:build\`       | Build the personal site under \`sites/fleekelon\`     |
+| \`npm run invest:list\`      | List theses / decisions / predictions               |
 | \`npm run check\`            | typecheck + lint + format + test + content validate |
 
 More detail: [docs/getting-started.md](docs/getting-started.md) · [docs/architecture.md](docs/architecture.md) · [docs/backlog.md](docs/backlog.md)

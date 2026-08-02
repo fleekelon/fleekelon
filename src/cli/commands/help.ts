@@ -15,6 +15,11 @@ Commands:
   content tags         Print tag index
   content stats        Print catalog statistics
   content digest       Render a markdown digest of the catalog
+  invest thesis new    Scaffold an investment thesis under content/theses/
+  invest decision new  Scaffold a decision memo under content/notes/
+  invest prediction new  Scaffold a falsifiable prediction note
+  invest settle <id>   Stamp prediction settlement [--result=]
+  invest list          List theses / decisions / predictions
   profile render       Render GitHub profile README markdown
   profile write        Write rendered markdown to README.md
   site build           Build personal site into sites/fleekelon

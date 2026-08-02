@@ -5,6 +5,7 @@ import { parseArgs } from "./parse-args.js";
 import { runContentCommand } from "./commands/content.js";
 import { formatDoctorReport, runDoctor } from "./commands/doctor.js";
 import { renderHelp } from "./commands/help.js";
+import { runInvestCommand } from "./commands/invest.js";
 import { runProfileCommand } from "./commands/profile.js";
 import { runSiteCommand } from "./commands/site.js";
 
@@ -78,6 +79,22 @@ export async function runCli(
 
     case "site": {
       const result = await runSiteCommand(args.positionals[0], contentRoot);
+      if (!result.ok) {
+        io.error(result.error);
+        return 1;
+      }
+      io.log(result.value);
+      return 0;
+    }
+
+    case "invest": {
+      const [subcommand, ...rest] = args.positionals;
+      const result = await runInvestCommand(
+        subcommand,
+        contentRoot,
+        rest,
+        args.flags,
+      );
       if (!result.ok) {
         io.error(result.error);
         return 1;

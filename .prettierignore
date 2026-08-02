@@ -7,3 +7,6 @@ sites/fleekelon/*.html
 sites/fleekelon/styles.css
 sites/fleekelon/site.js
 sites/**/assets/**
+sites/aera-landing/node_modules/**
+sites/aera-landing/dist/**
+sites/aera-landing/package-lock.json

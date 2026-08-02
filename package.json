@@ -1,6 +1,6 @@
 {
   "name": "fleekelon",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "description": "Personal engineering toolkit: TypeScript CLI, content catalog, profile/site renderer, and reusable project infrastructure.",
   "type": "module",
@@ -25,6 +25,10 @@
     "profile:render": "tsx src/index.ts profile render",
     "profile:write": "tsx src/index.ts profile write",
     "site:build": "tsx src/index.ts site build",
+    "invest:list": "tsx src/index.ts invest list",
+    "invest:thesis": "tsx src/index.ts invest thesis",
+    "invest:decision": "tsx src/index.ts invest decision",
+    "invest:prediction": "tsx src/index.ts invest prediction",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",

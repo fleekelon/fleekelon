@@ -53,3 +53,4 @@ jobs:
           npm start -- content list
           npm start -- content stats
           npm start -- site build
+          npm start -- invest help
