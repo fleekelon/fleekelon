@@ -27,5 +27,6 @@ describe("renderProfileReadme", () => {
       "[Demo Article](content/articles/demo/article.md)",
     );
     expect(markdown).toContain("[GitHub](https://github.com/fleekelon)");
+    expect(markdown).toContain("Toolkit in this repo");
   });
 });

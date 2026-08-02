@@ -66,4 +66,33 @@ describe("loadContentCatalog", () => {
 
     expect(result.error[0]).toContain("invalid meta.json");
   });
+
+  it("loads notes collections", async () => {
+    const root = await makeContentRoot();
+    const noteDir = path.join(root, "notes", "field");
+    await mkdir(noteDir, { recursive: true });
+    await writeFile(
+      path.join(noteDir, "meta.json"),
+      JSON.stringify({
+        id: "field",
+        title: "Field note",
+        summary: "A short note",
+        tags: ["note"],
+        body: "note.md",
+      }),
+    );
+    await writeFile(path.join(noteDir, "note.md"), "# Field note\n\nhello\n");
+
+    const result = await loadContentCatalog(root);
+    expect(result.ok).toBe(true);
+    if (!result.ok) {
+      return;
+    }
+
+    expect(result.value[0]).toMatchObject({
+      id: "field",
+      kind: "note",
+      title: "Field note",
+    });
+  });
 });

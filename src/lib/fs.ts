@@ -1,4 +1,11 @@
-import { access, readdir, readFile, stat } from "node:fs/promises";
+import {
+  access,
+  mkdir,
+  readdir,
+  readFile,
+  stat,
+  writeFile,
+} from "node:fs/promises";
 import path from "node:path";
 
 export async function pathExists(target: string): Promise<boolean> {
@@ -12,6 +19,14 @@ export async function pathExists(target: string): Promise<boolean> {
 
 export async function readTextFile(target: string): Promise<string> {
   return readFile(target, "utf8");
+}
+
+export async function writeTextFile(
+  target: string,
+  contents: string,
+): Promise<void> {
+  await mkdir(path.dirname(target), { recursive: true });
+  await writeFile(target, contents, "utf8");
 }
 
 export async function listDirectories(target: string): Promise<string[]> {

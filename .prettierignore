@@ -3,3 +3,7 @@ coverage
 node_modules
 package-lock.json
 *.pdf
+sites/fleekelon/*.html
+sites/fleekelon/styles.css
+sites/fleekelon/site.js
+sites/**/assets/**

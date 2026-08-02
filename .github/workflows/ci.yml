@@ -51,3 +51,5 @@ jobs:
           npm start -- help
           npm start -- doctor
           npm start -- content list
+          npm start -- content stats
+          npm start -- site build

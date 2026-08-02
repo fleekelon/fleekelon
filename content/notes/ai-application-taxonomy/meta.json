@@ -1,0 +1,7 @@
+{
+  "id": "ai-application-taxonomy",
+  "title": "AI 应用分类草图：按瓶颈与价值捕获分层",
+  "summary": "按自动化深度与价值捕获方式拆分 AI 应用，区分判断层业务与执行层工具，便于客户对话中快速定位产品位置。",
+  "tags": ["ai", "taxonomy", "product", "strategy"],
+  "body": "note.md"
+}

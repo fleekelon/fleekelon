@@ -2,7 +2,12 @@ import { readTextFile } from "../lib/fs.js";
 import { loadContentCatalog } from "./catalog.js";
 import type { ContentIssue, ContentValidationReport } from "./types.js";
 
-const MIN_ARTICLE_CHARS = 200;
+const MIN_BODY_CHARS: Record<string, number> = {
+  article: 200,
+  note: 200,
+  thesis: 200,
+  "chat-export": 200,
+};
 
 export async function validateContent(
   contentRoot: string,
@@ -28,11 +33,12 @@ export async function validateContent(
     }
 
     const body = await readTextFile(item.path);
-    if (body.trim().length < MIN_ARTICLE_CHARS) {
+    const minChars = MIN_BODY_CHARS[item.kind] ?? 200;
+    if (body.trim().length < minChars) {
       issues.push({
         id: item.id,
         level: "error",
-        message: `body shorter than ${MIN_ARTICLE_CHARS} characters`,
+        message: `body shorter than ${minChars} characters`,
       });
     }
 

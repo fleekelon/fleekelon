@@ -12,6 +12,13 @@ type RawMeta = {
   pdf?: unknown;
 };
 
+const KIND_ROOTS: Array<{ kind: ContentKind; relative: string }> = [
+  { kind: "article", relative: "articles" },
+  { kind: "note", relative: "notes" },
+  { kind: "thesis", relative: "theses" },
+  { kind: "chat-export", relative: "chat-export" },
+];
+
 function asString(value: unknown): string | undefined {
   return typeof value === "string" && value.trim() ? value.trim() : undefined;
 }
@@ -25,6 +32,20 @@ function asStringArray(value: unknown): string[] {
     .filter((item): item is string => typeof item === "string")
     .map((item) => item.trim())
     .filter(Boolean);
+}
+
+function defaultBodyName(kind: ContentKind): string {
+  switch (kind) {
+    case "note":
+      return "note.md";
+    case "thesis":
+      return "thesis.md";
+    case "chat-export":
+      return "transcript.md";
+    case "article":
+    default:
+      return "article.md";
+  }
 }
 
 async function loadItemFromDir(
@@ -47,7 +68,7 @@ async function loadItemFromDir(
   const id = asString(raw.id) ?? path.basename(dir);
   const title = asString(raw.title);
   const summary = asString(raw.summary);
-  const body = asString(raw.body) ?? "article.md";
+  const body = asString(raw.body) ?? defaultBodyName(kind);
   const bodyPath = path.join(dir, body);
 
   if (!title) {
@@ -76,33 +97,53 @@ async function loadItemFromDir(
   });
 }
 
+async function loadKindCollection(
+  contentRoot: string,
+  kind: ContentKind,
+  relative: string,
+): Promise<{ items: ContentItem[]; errors: string[] }> {
+  const items: ContentItem[] = [];
+  const errors: string[] = [];
+  const root = path.join(contentRoot, relative);
+
+  if (!(await pathExists(root))) {
+    return { items, errors };
+  }
+
+  // Legacy layout: a single meta.json directly under the kind root
+  // (used historically by chat-export/).
+  if (await pathExists(path.join(root, "meta.json"))) {
+    const result = await loadItemFromDir(root, kind);
+    if (result.ok) {
+      items.push(result.value);
+    } else {
+      errors.push(result.error);
+    }
+  }
+
+  const dirs = await listDirectories(root);
+  for (const dir of dirs) {
+    const result = await loadItemFromDir(dir, kind);
+    if (result.ok) {
+      items.push(result.value);
+    } else {
+      errors.push(result.error);
+    }
+  }
+
+  return { items, errors };
+}
+
 export async function loadContentCatalog(
   contentRoot: string,
 ): Promise<Result<ContentItem[], string[]>> {
   const items: ContentItem[] = [];
   const errors: string[] = [];
 
-  const articleRoot = path.join(contentRoot, "articles");
-  if (await pathExists(articleRoot)) {
-    const dirs = await listDirectories(articleRoot);
-    for (const dir of dirs) {
-      const result = await loadItemFromDir(dir, "article");
-      if (result.ok) {
-        items.push(result.value);
-      } else {
-        errors.push(result.error);
-      }
-    }
-  }
-
-  const chatRoot = path.join(contentRoot, "chat-export");
-  if (await pathExists(path.join(chatRoot, "meta.json"))) {
-    const result = await loadItemFromDir(chatRoot, "chat-export");
-    if (result.ok) {
-      items.push(result.value);
-    } else {
-      errors.push(result.error);
-    }
+  for (const { kind, relative } of KIND_ROOTS) {
+    const loaded = await loadKindCollection(contentRoot, kind, relative);
+    items.push(...loaded.items);
+    errors.push(...loaded.errors);
   }
 
   items.sort((a, b) => a.id.localeCompare(b.id));
@@ -112,4 +153,27 @@ export async function loadContentCatalog(
   }
 
   return ok(items);
+}
+
+export function filterContentByKind(
+  items: ContentItem[],
+  kind: ContentKind | undefined,
+): ContentItem[] {
+  if (!kind) {
+    return items;
+  }
+  return items.filter((item) => item.kind === kind);
+}
+
+export function filterContentByTag(
+  items: ContentItem[],
+  tag: string | undefined,
+): ContentItem[] {
+  if (!tag) {
+    return items;
+  }
+  const normalized = tag.trim().toLowerCase();
+  return items.filter((item) =>
+    item.tags.some((entry) => entry.toLowerCase() === normalized),
+  );
 }
