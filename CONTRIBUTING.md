@@ -22,12 +22,20 @@ Local and CI both expect:
 - `npm run lint`
 - `npm run format:check`
 - `npm test`
+- `npm run content:validate`
 - `npm run build`
 
 Pre-commit hooks run ESLint/Prettier on staged files via lint-staged.
 
+## Content changes
+
+- Put long-form writing under `content/articles/<id>/`.
+- Put archived conversations under `content/chat-export/`.
+- Always include `meta.json`.
+- Run `npm run content:validate` after edits.
+
 ## Documentation
 
-- Update `README.md` for user-facing usage changes.
-- Put deeper notes in `docs/`.
+- Keep the root `README.md` useful as a GitHub profile surface.
+- Put deeper engineering notes in `docs/`.
 - Prefer short, concrete acceptance criteria in issues and PRs.

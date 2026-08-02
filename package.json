@@ -1,17 +1,25 @@
 {
   "name": "fleekelon",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
-  "description": "Personal engineering scaffold: TypeScript, lint/format, tests, CI, and docs templates.",
+  "description": "Personal engineering toolkit: TypeScript CLI, content catalog, profile renderer, and reusable project infrastructure.",
   "type": "module",
   "engines": {
     "node": ">=22"
   },
   "packageManager": "npm@10.9.7",
+  "bin": {
+    "fleekelon": "./dist/index.js"
+  },
   "scripts": {
-    "dev": "tsx watch src/index.ts",
+    "dev": "tsx watch src/index.ts help",
     "build": "tsc -p tsconfig.build.json",
     "start": "node dist/index.js",
+    "fleekelon": "tsx src/index.ts",
+    "doctor": "tsx src/index.ts doctor",
+    "content:list": "tsx src/index.ts content list",
+    "content:validate": "tsx src/index.ts content validate",
+    "profile:render": "tsx src/index.ts profile render",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
@@ -20,7 +28,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
-    "check": "npm run typecheck && npm run lint && npm run format:check && npm run test",
+    "check": "npm run typecheck && npm run lint && npm run format:check && npm run test && npm run content:validate",
     "prepare": "husky"
   },
   "devDependencies": {

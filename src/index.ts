@@ -1,11 +1,11 @@
-import { getGreeting } from "./greeting.js";
+#!/usr/bin/env node
 import { loadConfig } from "./config.js";
+import { runCli } from "./cli/run.js";
 
-function main(): void {
+async function main(): Promise<void> {
   const config = loadConfig(process.env);
-  const message = getGreeting(config.appName);
-
-  console.log(message);
+  const code = await runCli(process.argv.slice(2), config);
+  process.exitCode = code;
 }
 
-main();
+await main();

@@ -40,5 +40,14 @@ jobs:
       - name: Test
         run: npm run test:coverage
 
+      - name: Validate content
+        run: npm run content:validate
+
       - name: Build
         run: npm run build
+
+      - name: CLI smoke
+        run: |
+          npm start -- help
+          npm start -- doctor
+          npm start -- content list

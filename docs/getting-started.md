@@ -16,26 +16,40 @@ npm install
 
 ## Environment variables
 
-| Variable   | Default       | Description                             |
-| ---------- | ------------- | --------------------------------------- |
-| `APP_NAME` | `fleekelon`   | Display/app name used by the sample     |
-| `NODE_ENV` | `development` | `development` \| `test` \| `production` |
+| Variable       | Default       | Description                                 |
+| -------------- | ------------- | ------------------------------------------- |
+| `APP_NAME`     | `fleekelon`   | CLI / app display name                      |
+| `NODE_ENV`     | `development` | `development` \| `test` \| `production`     |
+| `CONTENT_ROOT` | `content`     | Root directory for articles and chat export |
+| `LOG_LEVEL`    | `info`        | `debug` \| `info` \| `warn` \| `error`      |
 
 Secrets stay in `.env` (gitignored). Commit only `.env.example`.
 
-## Verify the scaffold
+## Verify the toolkit
 
 ```bash
 npm run check
+npm run doctor
+npm run content:list
+npm run profile:render
 npm run build
-npm start
+npm start -- help
 ```
 
-You should see a greeting printed from the sample app.
+## CLI quick reference
 
-## Extend the scaffold
+```bash
+npm run fleekelon -- help
+npm run fleekelon -- greet Frank
+npm run fleekelon -- doctor
+npm run fleekelon -- content list
+npm run fleekelon -- content validate
+npm run fleekelon -- profile render
+```
 
-1. Add modules under `src/`.
-2. Add corresponding tests under `tests/`.
-3. Keep public entrypoints thin (`src/index.ts`).
-4. Prefer pure functions for domain logic so tests stay fast.
+## Add a new article
+
+1. Create `content/articles/<id>/`.
+2. Add `meta.json` with `id`, `title`, `summary`, `tags`, and `body`.
+3. Add the markdown body (and optional PDF).
+4. Run `npm run content:validate`.
