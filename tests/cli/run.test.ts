@@ -71,4 +71,34 @@ describe("runCli", () => {
     expect(lines.join("\n")).toContain("# Frank Li");
     expect(lines.join("\n")).toContain("ai-execution-vs-judgment");
   });
+
+  it("searches content", async () => {
+    const lines: string[] = [];
+    const code = await runCli(
+      ["content", "search", "judgment", "--titles-only"],
+      loadConfig({}),
+      {
+        log: (message) => {
+          lines.push(message);
+        },
+        error: () => undefined,
+      },
+    );
+
+    expect(code).toBe(0);
+    expect(lines.join("\n")).toContain("ai-execution-vs-judgment");
+  });
+
+  it("prints content stats", async () => {
+    const lines: string[] = [];
+    const code = await runCli(["content", "stats"], loadConfig({}), {
+      log: (message) => {
+        lines.push(message);
+      },
+      error: () => undefined,
+    });
+
+    expect(code).toBe(0);
+    expect(lines.join("\n")).toContain("by-kind:");
+  });
 });

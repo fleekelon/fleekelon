@@ -1,4 +1,4 @@
-export type ContentKind = "article" | "chat-export";
+export type ContentKind = "article" | "note" | "thesis" | "chat-export";
 
 export type ContentItem = {
   id: string;
@@ -20,4 +20,17 @@ export type ContentValidationReport = {
   items: ContentItem[];
   issues: ContentIssue[];
   ok: boolean;
+};
+
+export type ContentStats = {
+  total: number;
+  byKind: Record<ContentKind, number>;
+  tags: Array<{ tag: string; count: number }>;
+  withPdf: number;
+};
+
+export type ContentSearchHit = {
+  item: ContentItem;
+  score: number;
+  matchedIn: Array<"id" | "title" | "summary" | "tags" | "body">;
 };

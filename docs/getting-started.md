@@ -16,12 +16,12 @@ npm install
 
 ## Environment variables
 
-| Variable       | Default       | Description                                 |
-| -------------- | ------------- | ------------------------------------------- |
-| `APP_NAME`     | `fleekelon`   | CLI / app display name                      |
-| `NODE_ENV`     | `development` | `development` \| `test` \| `production`     |
-| `CONTENT_ROOT` | `content`     | Root directory for articles and chat export |
-| `LOG_LEVEL`    | `info`        | `debug` \| `info` \| `warn` \| `error`      |
+| Variable       | Default       | Description                             |
+| -------------- | ------------- | --------------------------------------- |
+| `APP_NAME`     | `fleekelon`   | CLI / app display name                  |
+| `NODE_ENV`     | `development` | `development` \| `test` \| `production` |
+| `CONTENT_ROOT` | `content`     | Root directory for the content catalog  |
+| `LOG_LEVEL`    | `info`        | `debug` \| `info` \| `warn` \| `error`  |
 
 Secrets stay in `.env` (gitignored). Commit only `.env.example`.
 
@@ -31,7 +31,9 @@ Secrets stay in `.env` (gitignored). Commit only `.env.example`.
 npm run check
 npm run doctor
 npm run content:list
+npm run content:stats
 npm run profile:render
+npm run site:build
 npm run build
 npm start -- help
 ```
@@ -43,13 +45,46 @@ npm run fleekelon -- help
 npm run fleekelon -- greet Frank
 npm run fleekelon -- doctor
 npm run fleekelon -- content list
+npm run fleekelon -- content list --kind=note --tag=investing
+npm run fleekelon -- content search "capex bottleneck"
+npm run fleekelon -- content tags
+npm run fleekelon -- content stats
+npm run fleekelon -- content digest
 npm run fleekelon -- content validate
 npm run fleekelon -- profile render
+npm run fleekelon -- profile write
+npm run fleekelon -- site build
+npm run fleekelon -- invest thesis new cloud-handoff --title="Cloud handoff"
+npm run fleekelon -- invest decision new trim-memory --title="Trim memory beta"
+npm run fleekelon -- invest prediction new nvda-guide --domain=semiconductors --settle-by=2026-08-27
+npm run fleekelon -- invest list
 ```
 
-## Add a new article
+## Add a new article / note
 
-1. Create `content/articles/<id>/`.
+1. Create `content/articles/<id>/` or `content/notes/<id>/`.
 2. Add `meta.json` with `id`, `title`, `summary`, `tags`, and `body`.
-3. Add the markdown body (and optional PDF).
+3. Add the markdown body (and optional PDF for articles).
 4. Run `npm run content:validate`.
+5. Optionally rebuild the site: `npm run site:build`.
+6. Optionally sync the GitHub profile README: `npm run profile:write`.
+
+## Preview / publish the personal site
+
+Local:
+
+```bash
+npm run site:build
+cd sites/fleekelon
+python3 -m http.server 4173
+```
+
+Stable public URL (GitHub Pages):
+
+1. Open repo **Settings → Pages**
+2. Build and deployment → Source: **Deploy from a branch**
+3. Branch: **`gh-pages`** / folder **`/` (root)** → Save  
+   (or Source: **GitHub Actions** after merging the Pages workflow)
+4. Site will be at **https://fleekelon.github.io/fleekelon/**
+
+The `gh-pages` branch is already published from `sites/fleekelon`. Pushing to `main` with `.github/workflows/pages.yml` keeps Actions deploys in sync once Pages source is set to GitHub Actions.
