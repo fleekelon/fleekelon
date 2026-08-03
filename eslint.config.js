@@ -9,9 +9,8 @@ export default tseslint.config(
       "dist/**",
       "coverage/**",
       "node_modules/**",
-      "quack-ai/dist/**",
-      "quack-ai/.astro/**",
-      "quack-ai/node_modules/**",
+      // Self-contained Astro app — linted via `npm run check` inside quack-ai/.
+      "quack-ai/**",
     ],
   },
   js.configs.recommended,
