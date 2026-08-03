@@ -2,7 +2,12 @@ import { useEffect, useRef } from "react";
 import { useProgress } from "@react-three/drei";
 import { setLoadProgress, setLoadReady } from "./loadStore";
 
-const MIN_DISPLAY_MS = 900;
+/** Append `?boot` to the URL to hold the splash longer (demo / QA). */
+const MIN_DISPLAY_MS =
+  typeof window !== "undefined" &&
+  new URLSearchParams(window.location.search).has("boot")
+    ? 2400
+    : 1100;
 
 /**
  * Lives inside the R3F Canvas. Mirrors drei's DefaultLoadingManager progress
