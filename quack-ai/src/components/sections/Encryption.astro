@@ -1,0 +1,19 @@
+---
+import SqueakCipher from '../islands/SqueakCipher';
+---
+
+<section class="border-y border-cream/10 bg-ink-soft">
+  <div class="mx-auto grid max-w-7xl items-center gap-10 px-6 py-28 md:py-40 lg:grid-cols-2">
+    <div data-reveal>
+      <p class="eyebrow">secure communications, simplified</p>
+      <h2 class="h-section mt-4">Squeak-to-squeak encryption</h2>
+      <p class="mt-5 max-w-md text-sm leading-relaxed text-cream-dim">
+        Write a message. Squeeze. Instantly secure — every word is mapped to the same ciphertext
+        token, so not even we can read it. Genius.
+      </p>
+    </div>
+    <div data-reveal>
+      <SqueakCipher client:visible />
+    </div>
+  </div>
+</section>

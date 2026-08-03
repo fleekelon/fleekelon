@@ -1,0 +1,52 @@
+---
+import TemperatureLab from '../islands/TemperatureLab';
+
+const features = [
+  {
+    eyebrow: 'Latency: 0 ms',
+    title: 'Explains nothing. Fixes everything.',
+    body: 'Describe your bug out loud and watch the root cause reveal itself. Quack ships with our proprietary Silent Reasoning Engine: it says nothing, so you have to think.',
+  },
+  {
+    eyebrow: 'Buoyancy: 1.0 (certified)',
+    title: 'Floats. Natively.',
+    body: 'Zero-config flotation on water, coffee, and technical debt. Benchmarked on BathBench, our in-house evaluation suite conducted in a single bathtub and very possibly rigged by us.',
+  },
+  {
+    eyebrow: 'Now 37.9% rounder',
+    title: 'Perfectly smooth, seriously',
+    body: 'Our engineers recalibrated its curvature with disturbing levels of attention to detail — just because we could. RoPE: Roundness Optimization & Perimeter Engineering.',
+  },
+];
+---
+
+<section id="features" class="mx-auto max-w-7xl px-6 py-28 md:py-40">
+  <p class="eyebrow" data-reveal>capabilities</p>
+  <h2 class="h-section mt-4 max-w-2xl" data-reveal>Rise above mediocrity</h2>
+
+  <div class="mt-14 grid gap-6 md:grid-cols-3" data-reveal-stagger>
+    {
+      features.map((f) => (
+        <article class="card p-6">
+          <p class="eyebrow mb-5">{f.eyebrow}</p>
+          <h3 class="text-xl font-semibold">{f.title}</h3>
+          <p class="mt-4 text-sm leading-relaxed text-cream-dim">{f.body}</p>
+        </article>
+      ))
+    }
+  </div>
+
+  <div class="mt-16 grid items-center gap-10 lg:grid-cols-2">
+    <div data-reveal>
+      <p class="eyebrow">temperature stability</p>
+      <h3 class="h-section mt-4 !text-3xl md:!text-4xl">Handles extremes with ease</h3>
+      <p class="mt-5 max-w-md text-sm leading-relaxed text-cream-dim">
+        From T=0.1 to T=10, Quack-1 stays perfectly stable. Other models hallucinate under pressure —
+        ours collapses the entire probability distribution onto a single, correct token.
+      </p>
+    </div>
+    <div data-reveal>
+      <TemperatureLab client:visible />
+    </div>
+  </div>
+</section>

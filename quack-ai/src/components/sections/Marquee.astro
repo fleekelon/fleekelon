@@ -1,0 +1,24 @@
+---
+const items = [
+  'POWERED BY AI*',
+  '*AQUATIC INTELLIGENCE',
+  'ZERO TOKENS',
+  '28G OPEN WEIGHTS',
+  'RUNS ON THE EDGE (OF YOUR DESK)',
+  '24/7 UPTIME',
+  'NO CLOUD. ONLY POND.',
+];
+const row = [...items, ...items];
+---
+
+<div class="overflow-hidden border-y border-cream/10 bg-ink-soft py-4">
+  <div class="marquee-track gap-12 pr-12">
+    {
+      row.map((item) => (
+        <span class="flex items-center gap-12 font-mono text-xs tracking-[0.25em] whitespace-nowrap text-cream-dim">
+          {item} <span class="text-accent">◆</span>
+        </span>
+      ))
+    }
+  </div>
+</div>

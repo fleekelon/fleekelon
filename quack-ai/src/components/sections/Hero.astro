@@ -1,0 +1,25 @@
+---
+import DuckScene from '../three/DuckScene';
+---
+
+<section id="top" class="relative flex min-h-svh flex-col overflow-hidden">
+  <div class="absolute inset-0">
+    <DuckScene client:only="react" />
+  </div>
+
+  <div class="pointer-events-none relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-end px-6 pb-16">
+    <p class="eyebrow mb-4" data-reveal>Made for bugs. Built for desks.</p>
+    <h1 class="h-hero max-w-4xl" data-reveal>
+      The world’s most unnecessarily sophisticated rubber duck.
+    </h1>
+    <div class="mt-8 flex flex-wrap items-center gap-6" data-reveal>
+      <p class="max-w-md text-sm leading-relaxed text-cream-dim">
+        Designed to listen, float, and judge your code in all the right ways. Quack makes the loneliest
+        debugging session feel peer-reviewed.
+      </p>
+      <a href="#model" class="btn-ghost pointer-events-auto">Meet Quack-1</a>
+    </div>
+  </div>
+
+  <div class="scrim pointer-events-none absolute inset-x-0 bottom-0 h-40"></div>
+</section>

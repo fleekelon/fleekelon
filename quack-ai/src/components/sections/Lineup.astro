@@ -1,0 +1,73 @@
+---
+const models = [
+  {
+    name: 'QUACK',
+    tagline: 'One duck. One job. Done beautifully.',
+    specs: {
+      'Flock size': '1',
+      Squeak: 'Standard',
+      Weights: '28 g',
+      Connectivity: 'None',
+      Pairing: 'Not required',
+      Updates: 'Never',
+      'Best for': 'Daily bugs and quiet desks',
+    },
+  },
+  {
+    name: 'QUACK Pro',
+    tagline: 'Twice the rubber. Twice the commitment. Still effortless.',
+    specs: {
+      'Flock size': '2',
+      Squeak: 'Dual-tone',
+      Weights: '56 g',
+      Connectivity: 'None',
+      Pairing: 'Not required',
+      Updates: 'Never',
+      'Best for': 'Race conditions and taller monitors',
+    },
+  },
+  {
+    name: 'QUACK Pro Max',
+    tagline: 'A full flock of confidence. For engineers slightly above it all.',
+    specs: {
+      'Flock size': '3',
+      Squeak: 'Surround',
+      Weights: '84 g',
+      Connectivity: 'None',
+      Pairing: 'Not required',
+      Updates: 'Never',
+      'Best for': 'Distributed systems and maximum presence',
+    },
+  },
+];
+---
+
+<section id="lineup" class="border-y border-cream/10 bg-ink-soft">
+  <div class="mx-auto max-w-7xl px-6 py-28 md:py-40">
+    <p class="eyebrow" data-reveal>choose your own</p>
+    <h2 class="h-section mt-4" data-reveal>QUACK · QUACK Pro · QUACK Pro Max</h2>
+
+    <div class="mt-14 grid gap-6 lg:grid-cols-3" data-reveal-stagger>
+      {
+        models.map((m) => (
+          <article class="card flex flex-col p-6">
+            <h3 class="font-mono text-lg tracking-[0.12em]">{m.name}</h3>
+            <p class="mt-3 min-h-12 text-sm text-cream-dim">{m.tagline}</p>
+            <dl class="mt-6 flex-1 space-y-3 font-mono text-sm">
+              {Object.entries(m.specs).map(([k, v]) => (
+                <div class="flex justify-between gap-4 border-b border-cream/10 pb-3">
+                  <dt class="text-cream-dim">{k}</dt>
+                  <dd class="text-right">{v}</dd>
+                </div>
+              ))}
+            </dl>
+            <button type="button" class="btn-primary mt-8 justify-center">Pre-order*</button>
+          </article>
+        ))
+      }
+    </div>
+    <p class="mt-6 font-mono text-xs text-cream-dim" data-reveal>
+      * There is nothing to order. This is the whole point.
+    </p>
+  </div>
+</section>
