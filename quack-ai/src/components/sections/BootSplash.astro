@@ -1,0 +1,30 @@
+---
+/**
+ * Static first-paint splash. Renders in the HTML shell so users see a branded
+ * boot state before the React Canvas island hydrates. The React LoaderOverlay
+ * updates the bar via [data-boot-bar] / [data-boot-pct] and dismisses this node
+ * when loadStore flips to ready.
+ */
+---
+
+<div id="boot-splash" class="boot-loader" role="status" aria-live="polite" aria-busy="true">
+  <div class="boot-loader__inner">
+    <p class="boot-loader__eyebrow">QUACK-1 · BOOT SEQUENCE</p>
+    <p class="boot-loader__title">正在装填开放权重</p>
+    <div class="boot-loader__bar" aria-hidden="true">
+      <span data-boot-bar style="width: 8%"></span>
+    </div>
+    <p class="boot-loader__pct font-mono">
+      <span data-boot-pct>008</span>%
+      <span class="text-cream-dim"> · 预加载模型</span>
+    </p>
+  </div>
+</div>
+
+<style>
+  #boot-splash {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+  }
+</style>

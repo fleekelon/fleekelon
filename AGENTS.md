@@ -22,5 +22,6 @@ npm run check
 ### Boundaries
 
 - Keep engineering tooling and content catalog here.
+- The satirical WebGL launch-page demo (oryzo.ai-style) lives in `quack-ai/` — a self-contained Astro project with its own `package.json`; run its commands from that directory.
 - Do not merge unrelated marketing demos (for example AERA) into the repo root.
 - Wormhole corporate website work belongs in `fleekelon/wormhole-tax-website`.

@@ -1,0 +1,78 @@
+---
+const models = [
+  {
+    name: "QUACK",
+    tagline: "一只鸭子。一件事。做到极致。",
+    specs: {
+      编队规模: "1 只",
+      鸣叫: "标准单声道",
+      权重: "28 g",
+      连接性: "无",
+      配对: "无需配对",
+      系统更新: "从不",
+      适合场景: "日常 bug 与安静的书桌",
+    },
+  },
+  {
+    name: "QUACK Pro",
+    tagline: "双倍橡胶,双倍投入。依然毫不费力。",
+    specs: {
+      编队规模: "2 只",
+      鸣叫: "双声道",
+      权重: "56 g",
+      连接性: "无",
+      配对: "无需配对",
+      系统更新: "从不",
+      适合场景: "竞态条件与更高的显示器",
+    },
+  },
+  {
+    name: "QUACK Pro Max",
+    tagline: "一整支鸭队的底气。给略微凌驾于一切之上的工程师。",
+    specs: {
+      编队规模: "3 只",
+      鸣叫: "环绕声",
+      权重: "84 g",
+      连接性: "无",
+      配对: "无需配对",
+      系统更新: "从不",
+      适合场景: "分布式系统与最大存在感",
+    },
+  },
+];
+---
+
+<section id="lineup" class="relative border-y border-cream/10 bg-ink-soft">
+  <div class="glow top-20 -right-20 h-96 w-96"></div>
+  <div class="mx-auto max-w-7xl px-6 py-28 md:py-40">
+    <p class="eyebrow" data-reveal><span class="idx">07</span>选择你的那一只</p>
+    <h2 class="h-section mt-4" data-reveal>
+      QUACK · QUACK Pro · QUACK Pro Max
+    </h2>
+
+    <div class="mt-14 grid gap-6 lg:grid-cols-3" data-reveal-stagger>
+      {
+        models.map((m) => (
+          <article class="card flex flex-col p-6">
+            <h3 class="font-mono text-lg tracking-[0.12em]">{m.name}</h3>
+            <p class="mt-3 min-h-12 text-sm text-cream-dim">{m.tagline}</p>
+            <dl class="mt-6 flex-1 space-y-3 font-mono text-sm">
+              {Object.entries(m.specs).map(([k, v]) => (
+                <div class="flex justify-between gap-4 border-b border-cream/10 pb-3">
+                  <dt class="text-cream-dim">{k}</dt>
+                  <dd class="text-right">{v}</dd>
+                </div>
+              ))}
+            </dl>
+            <button type="button" class="btn-primary mt-8 justify-center">
+              立即预订*
+            </button>
+          </article>
+        ))
+      }
+    </div>
+    <p class="mt-6 font-mono text-xs text-cream-dim" data-reveal>
+      * 根本没有东西可以订。这正是重点所在。
+    </p>
+  </div>
+</section>

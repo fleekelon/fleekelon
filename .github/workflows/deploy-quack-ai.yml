@@ -1,0 +1,44 @@
+name: Deploy quack-ai (GitHub Pages)
+
+on:
+  push:
+    branches: [main, cursor/quack-ai-site-scaffold-f519]
+    paths:
+      - "quack-ai/**"
+      - ".github/workflows/deploy-quack-ai.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages-quack-ai
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: quack-ai
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: quack-ai/package-lock.json
+      - name: Install
+        run: npm ci
+      - name: Build for GitHub Pages
+        env:
+          ASTRO_BASE: /fleekelon/
+        run: npm run build
+      - name: Add .nojekyll
+        run: touch dist/.nojekyll
+      - name: Publish to gh-pages branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: quack-ai/dist
+          force_orphan: true

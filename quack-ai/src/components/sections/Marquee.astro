@@ -1,0 +1,24 @@
+---
+const items = [
+  "由 AI* 驱动",
+  "*水禽智能 AQUATIC INTELLIGENCE",
+  "零 TOKEN 消耗",
+  "28G 开放权重",
+  "运行在边缘(书桌的边缘)",
+  "24/7 全天候在线",
+  "拒绝云端 · 只认池塘",
+];
+const row = [...items, ...items];
+---
+
+<div class="overflow-hidden border-y border-cream/10 bg-ink-soft py-4">
+  <div class="marquee-track gap-12 pr-12">
+    {
+      row.map((item) => (
+        <span class="flex items-center gap-12 font-mono text-xs tracking-[0.25em] whitespace-nowrap text-cream-dim">
+          {item} <span class="text-accent">◆</span>
+        </span>
+      ))
+    }
+  </div>
+</div>

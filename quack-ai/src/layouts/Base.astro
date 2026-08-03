@@ -1,0 +1,86 @@
+---
+import "@fontsource-variable/space-grotesk";
+import "@fontsource-variable/noto-sans-sc";
+import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/ibm-plex-mono/500.css";
+import "../styles/global.css";
+import BootSplash from "../components/sections/BootSplash.astro";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "QUACK AI — 为 bug 而生,为桌面而造",
+  description = "全世界最没必要这么精致的橡皮鸭。一个讽刺性的产品发布页 + WebGL 实验场。",
+} = Astro.props;
+
+const duckUrl = `${import.meta.env.BASE_URL}models/duck.glb`;
+---
+
+<!doctype html>
+<html lang="zh-CN" class="is-booting">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <link
+      rel="icon"
+      href={`${import.meta.env.BASE_URL}favicon.svg`}
+      type="image/svg+xml"
+    />
+    <!-- Kick the hero glTF download before React hydrates the Canvas. -->
+    <link rel="preload" href={duckUrl} as="fetch" crossorigin="anonymous" />
+    <title>{title}</title>
+    <script is:inline>
+      // Safety net: never trap the page behind the cinematic boot splash.
+      // Prefer window.__quackForceBoot (set by loadStore) when the module is live.
+      document.documentElement.classList.add("is-booting");
+      window.setTimeout(function () {
+        if (document.documentElement.classList.contains("is-ready")) return;
+        if (typeof window.__quackForceBoot === "function") {
+          window.__quackForceBoot();
+          return;
+        }
+        document.documentElement.classList.remove("is-booting");
+        document.documentElement.classList.add("is-ready");
+        document.documentElement.style.setProperty("--boot-ready", "1");
+        var splash = document.getElementById("boot-splash");
+        if (splash && !splash.classList.contains("is-done")) {
+          splash.classList.add("is-done");
+          splash.setAttribute("aria-busy", "false");
+          window.setTimeout(function () {
+            splash.remove();
+          }, 700);
+        }
+      }, 8000);
+    </script>
+  </head>
+  <body>
+    <BootSplash />
+    <slot />
+    <script>
+      import { initScrollAnimations } from "../scripts/scroll";
+      // Defer scroll reveals until the boot splash has cleared so the hero
+      // copy doesn't animate in underneath the loader.
+      const start = () => initScrollAnimations();
+      if (document.documentElement.classList.contains("is-ready")) {
+        start();
+      } else {
+        const obs = new MutationObserver(() => {
+          if (document.documentElement.classList.contains("is-ready")) {
+            obs.disconnect();
+            start();
+          }
+        });
+        obs.observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ["class"],
+        });
+      }
+    </script>
+  </body>
+</html>

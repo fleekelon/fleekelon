@@ -1,0 +1,72 @@
+---
+const reviews = [
+  {
+    rating: "5/5",
+    quote:
+      "我对着它讲了 40 分钟竞态条件。它一言不发。然后我自己把 bug 修好了。十分,不能再多。",
+    name: "Priya K.",
+    title: "资深工程师(康复中)",
+  },
+  {
+    rating: "5/5",
+    quote: "终于有一个结对编程搭子,从来不建议把一切用 Rust 重写。",
+    name: "Jamie R.",
+    title: "AI 网红,前 Web3 网红",
+  },
+  {
+    rating: "4.5/5",
+    quote:
+      "我的鸭子?想要的话就送给你吧。去找吧!我把它落在某张桌子上了。",
+    name: "Gol D. Roger",
+    title: "老派海贼",
+  },
+  {
+    rating: "5/5",
+    quote: "它通过了我的代码评审。没有东西能通过我的代码评审。",
+    name: "Edan K.",
+    title: "首席评审官(自封)",
+  },
+  {
+    rating: "5/5",
+    quote: "我试了佩戴模式。我获得了……注意力。Attention is all I need。",
+    name: "Jules M.",
+    title: "极简主义者",
+  },
+];
+---
+
+<section class="relative mx-auto max-w-7xl px-6 py-28 md:py-40">
+  <div class="glow -top-10 left-1/4 h-80 w-80"></div>
+  <p class="eyebrow" data-reveal>
+    <span class="idx">06</span>评分与评价 · 用户评价 [ 364 ]
+  </p>
+  <h2 class="h-section mt-4 max-w-3xl" data-reveal>
+    全世界的人都爱 QUACK
+    <span class="align-middle font-mono text-2xl text-accent">[ 4.9/5 ]</span>
+  </h2>
+  <p class="mt-5 max-w-md text-sm text-cream-dim" data-reveal>
+    别只听我们的一面之词。看看大家与 QUACK 共同生活之后怎么说。
+  </p>
+
+  <div
+    class="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+    data-reveal-stagger
+  >
+    {
+      reviews.map((r) => (
+        <figure class="card flex flex-col justify-between p-6">
+          <div>
+            <p class="font-mono text-xs text-accent">[ {r.rating} ]</p>
+            <blockquote class="mt-4 text-base leading-relaxed">
+              "{r.quote}"
+            </blockquote>
+          </div>
+          <figcaption class="mt-6">
+            <p class="font-mono text-sm">{r.name}</p>
+            <p class="font-mono text-xs text-cream-dim">{r.title}</p>
+          </figcaption>
+        </figure>
+      ))
+    }
+  </div>
+</section>
