@@ -7,12 +7,13 @@
  * - One warm near-black canvas, one cream text color, ONE loud accent.
  * - Display face for structure (mostly uppercase), mono face for anything
  *   pretending to be "technical".
- * - No drop shadows; depth comes from translucent scrims and the 3D hero.
+ * - No hard drop shadows; depth comes from translucent scrims, glows and
+ *   the 3D hero. Film grain ties everything together.
  * - A separate pond-green palette reserved strictly for sustainability.
  */
 @theme {
   --color-ink: #0d0c09;
-  --color-ink-soft: #171511;
+  --color-ink-soft: #16140f;
   --color-cream: #f4ecd8;
   --color-cream-dim: #9d9480;
   --color-accent: #ffc400;
@@ -22,10 +23,12 @@
   --color-pond-light: #d9f0e2;
 
   --font-display:
-    "Space Grotesk Variable", "Space Grotesk", system-ui, sans-serif;
-  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+    "Space Grotesk Variable", "Noto Sans SC Variable", "Space Grotesk",
+    "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  --font-mono:
+    "IBM Plex Mono", "Noto Sans SC Variable", ui-monospace, monospace;
 
-  --radius-card: 1rem;
+  --radius-card: 1.25rem;
 }
 
 html {
@@ -37,11 +40,58 @@ body {
   color: var(--color-cream);
   font-family: var(--font-display);
   -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+/* Film grain over everything. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: 90;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  animation: grain 0.9s steps(4) infinite;
+}
+
+@keyframes grain {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-2%, 3%);
+  }
+  50% {
+    transform: translate(3%, -2%);
+  }
+  75% {
+    transform: translate(-3%, -3%);
+  }
+  100% {
+    transform: translate(2%, 2%);
+  }
 }
 
 ::selection {
   background: var(--color-accent);
   color: var(--color-ink);
+}
+
+/* Thin custom scrollbar. */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(244 236 216 / 0.15);
+  border-radius: 99px;
+  border: 2px solid var(--color-ink);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent);
 }
 
 /* --- Typography helpers ------------------------------------------------- */
@@ -54,17 +104,22 @@ body {
   color: var(--color-cream-dim);
 }
 
+.eyebrow .idx {
+  color: var(--color-accent);
+  margin-right: 0.75em;
+}
+
 .h-hero {
-  font-size: clamp(3rem, 10vw, 8.5rem);
-  line-height: 0.92;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.6rem, 8.5vw, 7rem);
+  line-height: 1.06;
+  letter-spacing: 0.01em;
   font-weight: 600;
 }
 
 .h-section {
-  font-size: clamp(2rem, 5vw, 4rem);
-  line-height: 1.02;
-  letter-spacing: -0.02em;
+  font-size: clamp(1.9rem, 4.5vw, 3.6rem);
+  line-height: 1.14;
+  letter-spacing: 0.01em;
   font-weight: 600;
 }
 
@@ -73,14 +128,61 @@ body {
   font-size: clamp(3rem, 8vw, 6.5rem);
   line-height: 1;
   color: var(--color-accent);
+  text-shadow: 0 0 48px rgb(255 196 0 / 0.35);
+}
+
+/* Giant hollow watermark titles. */
+.ghost-title {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: clamp(4rem, 18vw, 16rem);
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgb(244 236 216 / 0.1);
+  user-select: none;
+  pointer-events: none;
+  white-space: nowrap;
 }
 
 /* --- Surfaces ------------------------------------------------------------ */
 
 .card {
-  background: var(--color-ink-soft);
-  border: 1px solid rgb(244 236 216 / 0.08);
+  position: relative;
+  background:
+    linear-gradient(165deg, rgb(255 255 255 / 0.04), rgb(255 255 255 / 0) 45%),
+    var(--color-ink-soft);
+  border: 1px solid rgb(244 236 216 / 0.09);
   border-radius: var(--radius-card);
+  transition:
+    border-color 200ms ease,
+    transform 250ms ease;
+}
+
+.card:hover {
+  border-color: rgb(255 196 0 / 0.35);
+  transform: translateY(-3px);
+}
+
+/* Accent hairline that fades in along the card top on hover. */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -1px -1px auto -1px;
+  height: 1px;
+  border-radius: 99px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgb(255 196 0 / 0.7),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+
+.card:hover::before {
+  opacity: 1;
 }
 
 .scrim {
@@ -91,11 +193,26 @@ body {
   );
 }
 
+/* Ambient radial glow blob (position with utilities). */
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgb(255 196 0 / 0.14) 0%,
+    rgb(255 138 0 / 0.05) 40%,
+    transparent 70%
+  );
+  filter: blur(20px);
+  pointer-events: none;
+}
+
 .btn-primary {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  background: var(--color-accent);
+  background: linear-gradient(180deg, #ffd23d, var(--color-accent));
   color: var(--color-ink);
   border: 1px solid var(--color-accent-deep);
   border-radius: 999px;
@@ -106,20 +223,21 @@ body {
   text-transform: uppercase;
   cursor: pointer;
   transition:
-    transform 120ms ease,
-    background 120ms ease;
+    transform 150ms ease,
+    box-shadow 150ms ease;
 }
 
 .btn-primary:hover {
-  background: #ffd23d;
   transform: translateY(-1px);
+  box-shadow: 0 0 32px rgb(255 196 0 / 0.35);
 }
 
 .btn-ghost {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  background: transparent;
+  background: rgb(244 236 216 / 0.03);
   color: var(--color-cream);
   border: 1px solid rgb(244 236 216 / 0.25);
   border-radius: 999px;
@@ -129,11 +247,73 @@ body {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: border-color 120ms ease;
+  backdrop-filter: blur(8px);
+  transition:
+    border-color 150ms ease,
+    box-shadow 150ms ease;
 }
 
 .btn-ghost:hover {
   border-color: var(--color-accent);
+  box-shadow: 0 0 24px rgb(255 196 0 / 0.15);
+}
+
+/* --- Header -------------------------------------------------------------- */
+
+.site-header {
+  transition:
+    background-color 300ms ease,
+    border-color 300ms ease,
+    backdrop-filter 300ms ease;
+  border-bottom: 1px solid transparent;
+}
+
+.site-header.is-scrolled {
+  background: rgb(13 12 9 / 0.72);
+  border-bottom-color: rgb(244 236 216 / 0.08);
+  backdrop-filter: blur(14px);
+}
+
+/* --- Range slider -------------------------------------------------------- */
+
+input[type="range"].slider {
+  appearance: none;
+  width: 100%;
+  height: 3px;
+  border-radius: 99px;
+  background: linear-gradient(
+    90deg,
+    var(--color-accent) 0%,
+    var(--color-accent) var(--slider-fill, 50%),
+    rgb(244 236 216 / 0.15) var(--slider-fill, 50%)
+  );
+  outline: none;
+}
+
+input[type="range"].slider::-webkit-slider-thumb {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: 3px solid var(--color-ink);
+  box-shadow: 0 0 16px rgb(255 196 0 / 0.6);
+  cursor: grab;
+  transition: transform 120ms ease;
+}
+
+input[type="range"].slider::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+}
+
+input[type="range"].slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  border: 3px solid var(--color-ink);
+  box-shadow: 0 0 16px rgb(255 196 0 / 0.6);
+  cursor: grab;
 }
 
 /* --- Scroll reveal (driven by GSAP, see src/scripts/scroll.ts) ----------- */
@@ -155,7 +335,7 @@ body {
 .marquee-track {
   display: flex;
   width: max-content;
-  animation: marquee 28s linear infinite;
+  animation: marquee 30s linear infinite;
 }
 
 @keyframes marquee {
@@ -174,5 +354,8 @@ body {
   [data-reveal] {
     opacity: 1;
     transform: none;
+  }
+  body::after {
+    animation: none;
   }
 }

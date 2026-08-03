@@ -12,6 +12,16 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 export function initScrollAnimations(): void {
   gsap.registerPlugin(ScrollTrigger);
 
+  // Frosted-glass header once the hero is scrolled past.
+  const header = document.querySelector<HTMLElement>("[data-header]");
+  if (header) {
+    const update = () => {
+      header.classList.toggle("is-scrolled", window.scrollY > 24);
+    };
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+  }
+
   const reveals = gsap.utils.toArray<HTMLElement>("[data-reveal]");
   for (const el of reveals) {
     gsap.to(el, {

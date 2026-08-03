@@ -1,8 +1,9 @@
 ---
-import '@fontsource-variable/space-grotesk';
-import '@fontsource/ibm-plex-mono/400.css';
-import '@fontsource/ibm-plex-mono/500.css';
-import '../styles/global.css';
+import "@fontsource-variable/space-grotesk";
+import "@fontsource-variable/noto-sans-sc";
+import "@fontsource/ibm-plex-mono/400.css";
+import "@fontsource/ibm-plex-mono/500.css";
+import "../styles/global.css";
 
 interface Props {
   title?: string;
@@ -10,13 +11,13 @@ interface Props {
 }
 
 const {
-  title = 'QUACK AI — Made for bugs. Built for desks.',
-  description = 'The world’s most unnecessarily sophisticated rubber duck. A satirical product launch and WebGL playground.',
+  title = "QUACK AI — 为 bug 而生,为桌面而造",
+  description = "全世界最没必要这么精致的橡皮鸭。一个讽刺性的产品发布页 + WebGL 实验场。",
 } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -29,7 +30,7 @@ const {
   <body>
     <slot />
     <script>
-      import { initScrollAnimations } from '../scripts/scroll';
+      import { initScrollAnimations } from "../scripts/scroll";
       initScrollAnimations();
     </script>
   </body>

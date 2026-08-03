@@ -1,34 +1,43 @@
 ---
-import AskQuack from '../islands/AskQuack';
+import AskQuack from "../islands/AskQuack";
+
+const specs = [
+  ["参数量", "1(黄色)"],
+  ["权重", "28 g,完全开放"],
+  ["上下文窗口", "恰好一张书桌"],
+  ["输出词表", "1 个 token"],
+  ["确定性", "绝对"],
+  ["功耗", "0 W"],
+  ["推理延迟", "0 ms(提前算好了)"],
+];
 ---
 
-<section id="model" class="mx-auto max-w-7xl px-6 py-28 md:py-40">
-  <p class="eyebrow" data-reveal>Quack-1 · our flagship model</p>
+<section id="model" class="relative mx-auto max-w-7xl px-6 py-28 md:py-40">
+  <div class="glow -top-20 right-0 h-96 w-96"></div>
+  <p class="eyebrow" data-reveal><span class="idx">01</span>QUACK-1 · 旗舰模型</p>
   <h2 class="h-section mt-4 max-w-3xl" data-reveal>
-    Powered by AI<sup class="text-accent">*</sup>
+    由 AI<sup class="text-accent">*</sup> 驱动
   </h2>
-  <p class="mt-6 max-w-xl text-sm leading-relaxed text-cream-dim" data-reveal>
-    Quack isn’t just a duck. It’s the result of unprecedented AI* breakthroughs: a fully open-weight
-    (28 grams), on-device reasoning system with a context window of exactly one desk.
+  <p
+    class="mt-6 max-w-xl text-sm leading-relaxed text-cream-dim"
+    data-reveal
+  >
+    QUACK 不只是一只鸭子。它是一系列史无前例的 AI*
+    突破的结晶:完全开放权重(整整 28
+    克)、纯端侧推理,上下文窗口恰好覆盖一张书桌。
   </p>
-  <p class="mt-3 font-mono text-xs text-cream-dim" data-reveal>* Aquatic Intelligence</p>
+  <p class="mt-3 font-mono text-xs text-cream-dim" data-reveal>
+    * 水禽智能(Aquatic Intelligence)
+  </p>
 
   <div class="mt-14 grid gap-6 lg:grid-cols-2" data-reveal>
     <AskQuack client:visible />
     <div class="card flex flex-col justify-between p-6">
       <div>
-        <p class="eyebrow mb-4">model card</p>
+        <p class="eyebrow mb-4">模型卡</p>
         <dl class="space-y-3 font-mono text-sm">
           {
-            [
-              ['Parameters', '1 (yellow)'],
-              ['Weights', '28 g, fully open'],
-              ['Context window', '1 desk'],
-              ['Output vocabulary', '1 token'],
-              ['Determinism', 'absolute'],
-              ['Power draw', '0 W'],
-              ['Inference latency', '0 ms (pre-computed)'],
-            ].map(([k, v]) => (
+            specs.map(([k, v]) => (
               <div class="flex justify-between gap-6 border-b border-cream/10 pb-3">
                 <dt class="text-cream-dim">{k}</dt>
                 <dd class="text-right">{v}</dd>
@@ -38,7 +47,7 @@ import AskQuack from '../islands/AskQuack';
         </dl>
       </div>
       <p class="mt-6 font-mono text-xs text-cream-dim">
-        AI fills in the gaps. We said “rubber duck debugging”. It heard “senior staff engineer”.
+        AI 总会自动脑补。我们说的是"橡皮鸭调试法",它听成了"资深主任工程师"。
       </p>
     </div>
   </div>

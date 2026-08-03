@@ -1,28 +1,32 @@
 ---
-import TemperatureLab from '../islands/TemperatureLab';
+import TemperatureLab from "../islands/TemperatureLab";
 
 const features = [
   {
-    eyebrow: 'Latency: 0 ms',
-    title: 'Explains nothing. Fixes everything.',
-    body: 'Describe your bug out loud and watch the root cause reveal itself. Quack ships with our proprietary Silent Reasoning Engine: it says nothing, so you have to think.',
+    eyebrow: "延迟:0 ms",
+    title: "什么都不解释,却什么都修好了",
+    body: "把 bug 大声讲给它听,看着根因自己浮出水面。QUACK 搭载我们自研的「沉默推理引擎」:它一言不发,于是你只好自己开始思考。",
   },
   {
-    eyebrow: 'Buoyancy: 1.0 (certified)',
-    title: 'Floats. Natively.',
-    body: 'Zero-config flotation on water, coffee, and technical debt. Benchmarked on BathBench, our in-house evaluation suite conducted in a single bathtub and very possibly rigged by us.',
+    eyebrow: "浮力:1.0(已认证)",
+    title: "原生漂浮,开箱即用",
+    body: "零配置漂浮于清水、咖啡与技术债之上。成绩来自 BathBench——我们的内部评测集,在一只浴缸里完成,且极有可能被我们做了手脚。",
   },
   {
-    eyebrow: 'Now 37.9% rounder',
-    title: 'Perfectly smooth, seriously',
-    body: 'Our engineers recalibrated its curvature with disturbing levels of attention to detail — just because we could. RoPE: Roundness Optimization & Perimeter Engineering.',
+    eyebrow: "圆润度提升 37.9%",
+    title: "圆,而且圆得很认真",
+    body: "我们的工程师以令人不安的专注度重新校准了它的曲率——纯粹因为我们做得到。RoPE:Roundness Optimization & Perimeter Engineering。",
   },
 ];
 ---
 
-<section id="features" class="mx-auto max-w-7xl px-6 py-28 md:py-40">
-  <p class="eyebrow" data-reveal>capabilities</p>
-  <h2 class="h-section mt-4 max-w-2xl" data-reveal>Rise above mediocrity</h2>
+<section
+  id="features"
+  class="relative mx-auto max-w-7xl px-6 py-28 md:py-40"
+>
+  <div class="glow top-1/3 -left-40 h-96 w-96"></div>
+  <p class="eyebrow" data-reveal><span class="idx">02</span>核心能力</p>
+  <h2 class="h-section mt-4 max-w-2xl" data-reveal>凌驾于平庸之上</h2>
 
   <div class="mt-14 grid gap-6 md:grid-cols-3" data-reveal-stagger>
     {
@@ -38,11 +42,14 @@ const features = [
 
   <div class="mt-16 grid items-center gap-10 lg:grid-cols-2">
     <div data-reveal>
-      <p class="eyebrow">temperature stability</p>
-      <h3 class="h-section mt-4 !text-3xl md:!text-4xl">Handles extremes with ease</h3>
+      <p class="eyebrow">温度稳定性</p>
+      <h3 class="h-section mt-4 !text-3xl md:!text-4xl">
+        从容应对一切极端参数
+      </h3>
       <p class="mt-5 max-w-md text-sm leading-relaxed text-cream-dim">
-        From T=0.1 to T=10, Quack-1 stays perfectly stable. Other models hallucinate under pressure —
-        ours collapses the entire probability distribution onto a single, correct token.
+        从 T=0.1 到
+        T=10,QUACK-1 始终稳如泰山。别的模型一加压就开始幻觉——我们的模型直接把整个概率分布,坍缩到唯一正确的那个
+        token 上。
       </p>
     </div>
     <div data-reveal>

@@ -12,10 +12,7 @@ interface Turn {
 export default function AskQuack() {
   const [input, setInput] = useState("");
   const [turns, setTurns] = useState<Turn[]>([
-    {
-      role: "duck",
-      text: "Quack. (Ask me anything. I already know the answer.)",
-    },
+    { role: "duck", text: "呱。(随便问。答案我早就知道了。)" },
   ]);
   const [thinking, setThinking] = useState(false);
 
@@ -26,14 +23,14 @@ export default function AskQuack() {
     setTurns((t) => [...t, { role: "user", text: prompt }]);
     setThinking(true);
     window.setTimeout(() => {
-      setTurns((t) => [...t, { role: "duck", text: "Quack." }]);
+      setTurns((t) => [...t, { role: "duck", text: "呱。" }]);
       setThinking(false);
     }, 900);
   }
 
   return (
     <div className="card flex h-full flex-col p-6">
-      <p className="eyebrow mb-4">quack-1 · live inference · 0 tokens/s</p>
+      <p className="eyebrow mb-4">quack-1 · 实时推理 · 0 tokens/s</p>
       <div
         className="flex-1 space-y-3 overflow-y-auto font-mono text-sm"
         style={{ minHeight: "10rem" }}
@@ -49,20 +46,18 @@ export default function AskQuack() {
             {turn.text}
           </p>
         ))}
-        {thinking && (
-          <p className="text-accent animate-pulse">&gt; reasoning…</p>
-        )}
+        {thinking && <p className="animate-pulse text-accent">&gt; 推理中…</p>}
       </div>
       <div className="mt-5 flex gap-3">
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && send()}
-          placeholder="Hey @quack, can you fix my segfault?"
+          placeholder="嘿 @quack,能修一下我的段错误吗?"
           className="w-full rounded-full border border-cream/20 bg-transparent px-5 py-3 font-mono text-sm outline-none placeholder:text-cream-dim/60 focus:border-accent"
         />
         <button className="btn-primary" onClick={send} type="button">
-          Send
+          发送
         </button>
       </div>
     </div>

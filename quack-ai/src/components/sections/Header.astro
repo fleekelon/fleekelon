@@ -1,19 +1,29 @@
 ---
 const links = [
-  { href: '#model', label: 'Quack-1' },
-  { href: '#features', label: 'Features' },
-  { href: '#benchmarks', label: 'Benchmarks' },
-  { href: '#lineup', label: 'Lineup' },
-  { href: '#paper', label: 'Paper' },
+  { href: "#model", label: "模型" },
+  { href: "#features", label: "能力" },
+  { href: "#benchmarks", label: "跑分" },
+  { href: "#lineup", label: "产品线" },
+  { href: "#paper", label: "论文" },
 ];
 ---
 
-<header class="fixed inset-x-0 top-0 z-50">
-  <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-    <a href="#top" class="font-mono text-sm tracking-[0.3em] text-cream">QUACK&nbsp;AI</a>
-    <nav class="hidden gap-8 font-mono text-xs tracking-[0.18em] uppercase text-cream-dim md:flex">
-      {links.map((l) => <a class="transition-colors hover:text-accent" href={l.href}>{l.label}</a>)}
+<header class="site-header fixed inset-x-0 top-0 z-50" data-header>
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+    <a href="#top" class="font-mono text-sm tracking-[0.3em] text-cream"
+      >QUACK&nbsp;AI</a
+    >
+    <nav
+      class="hidden gap-8 font-mono text-xs tracking-[0.18em] text-cream-dim md:flex"
+    >
+      {
+        links.map((l) => (
+          <a class="transition-colors hover:text-accent" href={l.href}>
+            {l.label}
+          </a>
+        ))
+      }
     </nav>
-    <a href="#lineup" class="btn-primary !py-2.5 !px-5">Pre-order*</a>
+    <a href="#lineup" class="btn-primary !px-5 !py-2.5">立即预订*</a>
   </div>
 </header>

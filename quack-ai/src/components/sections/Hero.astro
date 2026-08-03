@@ -1,25 +1,47 @@
 ---
-import DuckScene from '../three/DuckScene';
+import DuckScene from "../three/DuckScene";
 ---
 
 <section id="top" class="relative flex min-h-svh flex-col overflow-hidden">
+  <!-- Ambient glow + giant watermark behind the 3D scene. -->
+  <div
+    class="glow top-1/4 left-1/2 h-[42rem] w-[42rem] -translate-x-1/2 -translate-y-1/4"
+  >
+  </div>
+  <div
+    class="ghost-title absolute top-16 left-1/2 -translate-x-1/2 md:top-10"
+    aria-hidden="true"
+  >
+    QUACK-1
+  </div>
+
   <div class="absolute inset-0">
     <DuckScene client:only="react" />
   </div>
 
-  <div class="pointer-events-none relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-end px-6 pb-16">
-    <p class="eyebrow mb-4" data-reveal>Made for bugs. Built for desks.</p>
+  <div
+    class="pointer-events-none relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-end px-6 pb-16"
+  >
+    <p class="eyebrow mb-4" data-reveal>为 bug 而生 · 为桌面而造</p>
     <h1 class="h-hero max-w-4xl" data-reveal>
-      The world’s most unnecessarily sophisticated rubber duck.
+      全世界最没必要<br />这么精致的<span class="text-accent">橡皮鸭</span>。
     </h1>
     <div class="mt-8 flex flex-wrap items-center gap-6" data-reveal>
       <p class="max-w-md text-sm leading-relaxed text-cream-dim">
-        Designed to listen, float, and judge your code in all the right ways. Quack makes the loneliest
-        debugging session feel peer-reviewed.
+        它会倾听,会漂浮,会以恰到好处的方式审视你的代码。QUACK
+        让最孤独的调试时刻,也像经过了同行评审。
       </p>
-      <a href="#model" class="btn-ghost pointer-events-auto">Meet Quack-1</a>
+      <a href="#model" class="btn-ghost pointer-events-auto">认识 QUACK-1</a>
     </div>
   </div>
 
   <div class="scrim pointer-events-none absolute inset-x-0 bottom-0 h-40"></div>
+
+  <!-- Scroll cue -->
+  <div
+    class="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 animate-bounce font-mono text-xs tracking-[0.3em] text-cream-dim"
+    aria-hidden="true"
+  >
+    ↓
+  </div>
 </section>

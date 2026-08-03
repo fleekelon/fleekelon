@@ -9,29 +9,34 @@ const bibtex = `@misc{quack2026,
 }`;
 ---
 
-<section id="paper" class="mx-auto max-w-7xl px-6 py-28 md:py-40">
-  <p class="eyebrow" data-reveal>our sota open-weight model</p>
-  <h2 class="h-section mt-4" data-reveal>The paper</h2>
+<section id="paper" class="relative mx-auto max-w-7xl px-6 py-28 md:py-40">
+  <div class="ghost-title absolute -top-6 left-0 opacity-60" aria-hidden="true">
+    PAPER
+  </div>
+  <p class="eyebrow" data-reveal>
+    <span class="idx">08</span>我们的 SOTA 开放权重模型
+  </p>
+  <h2 class="h-section mt-4" data-reveal>技术报告</h2>
 
   <div class="mt-14 grid gap-6 lg:grid-cols-2">
     <div class="card p-8" data-reveal>
-      <h3 class="eyebrow mb-4">Abstract</h3>
+      <h3 class="eyebrow mb-4">摘要</h3>
       <p class="text-sm leading-relaxed text-cream-dim">
-        We present Quack-1, an open-weight rubber duck for interactive program repair and gloriously
-        unnecessary research. Quack-1 faithfully reproduces key duck behaviors — patient listening,
-        perfect buoyancy, and passive judgment under everyday debugging conditions. We report baseline
-        results on BathBench, a standardized evaluation suite conducted in a single bathtub and very
-        possibly rigged by us. Limitations include heavy dependency on gravity, desks, and human
-        self-awareness.
+        我们提出
+        QUACK-1:一只面向交互式程序修复与"华丽而无必要"研究的开放权重橡皮鸭。QUACK-1
+        忠实复现了鸭子的各项关键行为——耐心倾听、完美浮力,以及在日常调试场景下的被动审视。我们在
+        BathBench
+        上报告了基线成绩(该标准化评测集在一只浴缸中完成,且极有可能被我们做了手脚)。局限性包括:严重依赖重力、书桌,以及人类的自我觉察能力。
       </p>
-      <h3 class="eyebrow mt-8 mb-4">Peer review</h3>
+      <h3 class="eyebrow mt-8 mb-4">同行评审</h3>
       <p class="text-sm leading-relaxed text-cream-dim">
-        “Quack-1 is the best model out there. Trust me bro.” — Anonymous forum user
+        "QUACK-1 是目前最强的模型,信我,兄弟。"——匿名论坛用户
       </p>
     </div>
     <div class="card p-8" data-reveal>
       <h3 class="eyebrow mb-4">BibTeX</h3>
-      <pre class="overflow-x-auto rounded-xl bg-ink p-5 font-mono text-xs leading-relaxed text-cream-dim">{bibtex}</pre>
+      <pre
+        class="overflow-x-auto rounded-xl bg-ink p-5 font-mono text-xs leading-relaxed text-cream-dim">{bibtex}</pre>
     </div>
   </div>
 </section>
