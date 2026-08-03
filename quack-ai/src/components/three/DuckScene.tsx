@@ -1,8 +1,9 @@
-import { Suspense, useEffect, useRef } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Suspense, useEffect, useRef, type RefObject } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { ContactShadows, Sparkles, useGLTF } from "@react-three/drei";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import type { PointLight } from "three";
 import { Duck } from "./Duck";
 import { CameraRig } from "./CameraRig";
 import { ProgressBridge, SceneReady } from "./ProgressBridge";
@@ -13,6 +14,34 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Kick the GLB fetch as early as this module evaluates (before Canvas mount).
 useGLTF.preload(DUCK_MODEL_URL);
+
+/** Key light that drifts with the pointer so SSS catchlights read clearly. */
+function FollowLight({
+  pointer,
+}: {
+  pointer: RefObject<{ x: number; y: number }>;
+}) {
+  const light = useRef<PointLight>(null);
+  useFrame((_, delta) => {
+    if (!light.current) return;
+    const tx = (pointer.current?.x ?? 0) * 3.2;
+    const ty = 1.2 - (pointer.current?.y ?? 0) * 1.6;
+    light.current.position.x +=
+      (tx - light.current.position.x) * Math.min(1, delta * 4);
+    light.current.position.y +=
+      (ty - light.current.position.y) * Math.min(1, delta * 4);
+  });
+  return (
+    <pointLight
+      ref={light}
+      position={[2, 1.5, 3.5]}
+      intensity={2.8}
+      color="#ffe0a0"
+      distance={12}
+      decay={2}
+    />
+  );
+}
 
 /**
  * Sticky-hero WebGL scene + branded boot loader.
@@ -79,6 +108,7 @@ export default function DuckScene() {
           />
           <pointLight position={[0, 3, -5]} intensity={2.4} color="#ff9d33" />
           <pointLight position={[0, -2, 4]} intensity={0.55} color="#ff8a00" />
+          <FollowLight pointer={pointer} />
 
           <CameraRig progress={progress} duckPose={duckPose} />
           <ProgressBridge />

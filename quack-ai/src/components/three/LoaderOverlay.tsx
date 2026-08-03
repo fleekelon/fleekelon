@@ -2,31 +2,47 @@ import { useEffect, useState } from "react";
 import { getLoadSnapshot, subscribeLoad, type LoadSnapshot } from "./loadStore";
 
 /**
- * Branded boot splash. Mounted as a DOM sibling of the Canvas so it can cover
- * the whole sticky hero (and briefly the page) without fighting WebGL.
+ * Drives the static `#boot-splash` (first paint) and optionally renders a
+ * React fallback bar if that node was already removed. Dismisses the splash
+ * when the load store reports ready.
  */
 export default function LoaderOverlay() {
   const [snap, setSnap] = useState<LoadSnapshot>(getLoadSnapshot);
-  const [gone, setGone] = useState(false);
 
   useEffect(() => subscribeLoad(setSnap), []);
 
   useEffect(() => {
-    if (!snap.ready) return;
-    const id = window.setTimeout(() => setGone(true), 700);
-    return () => window.clearTimeout(id);
-  }, [snap.ready]);
+    const bar = document.querySelector<HTMLElement>("[data-boot-bar]");
+    const pctEl = document.querySelector<HTMLElement>("[data-boot-pct]");
+    const splash = document.getElementById("boot-splash");
+    const pct = Math.min(100, Math.round(snap.progress || 8));
 
-  if (gone) return null;
+    if (bar) bar.style.width = `${Math.max(8, pct)}%`;
+    if (pctEl) pctEl.textContent = pct.toString().padStart(3, "0");
+
+    if (snap.ready && splash && !splash.classList.contains("is-done")) {
+      splash.classList.add("is-done");
+      splash.setAttribute("aria-busy", "false");
+      window.setTimeout(() => splash.remove(), 700);
+    }
+  }, [snap]);
+
+  // React-side fallback only if the static splash was stripped somehow.
+  if (snap.ready) return null;
+  if (
+    typeof document !== "undefined" &&
+    document.getElementById("boot-splash")
+  ) {
+    return null;
+  }
 
   const pct = Math.min(100, Math.round(snap.progress));
-
   return (
     <div
-      className={`boot-loader${snap.ready ? " is-done" : ""}`}
+      className="boot-loader"
       role="status"
       aria-live="polite"
-      aria-busy={!snap.ready}
+      aria-busy="true"
     >
       <div className="boot-loader__inner">
         <p className="boot-loader__eyebrow">QUACK-1 · BOOT SEQUENCE</p>

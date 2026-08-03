@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react";
 import { useProgress } from "@react-three/drei";
 import { setLoadProgress, setLoadReady } from "./loadStore";
 
-/** Append `?boot` to the URL to hold the splash longer (demo / QA). */
+/** Append ?boot to the URL to hold the splash longer (demo / QA). */
 const MIN_DISPLAY_MS =
   typeof window !== "undefined" &&
   new URLSearchParams(window.location.search).has("boot")
