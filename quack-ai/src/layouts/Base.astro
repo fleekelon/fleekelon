@@ -14,24 +14,59 @@ const {
   title = "QUACK AI — 为 bug 而生,为桌面而造",
   description = "全世界最没必要这么精致的橡皮鸭。一个讽刺性的产品发布页 + WebGL 实验场。",
 } = Astro.props;
+
+const duckUrl = `${import.meta.env.BASE_URL}models/duck.glb`;
 ---
 
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" class="is-booting">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.svg`} type="image/svg+xml" />
+    <link
+      rel="icon"
+      href={`${import.meta.env.BASE_URL}favicon.svg`}
+      type="image/svg+xml"
+    />
+    <!-- Kick the hero glTF download before React hydrates the Canvas. -->
+    <link rel="preload" href={duckUrl} as="fetch" crossorigin="anonymous" />
     <title>{title}</title>
+    <script is:inline>
+      // If JS is disabled / fails, don't trap the page behind the splash.
+      document.documentElement.classList.add("is-booting");
+      window.setTimeout(function () {
+        if (!document.documentElement.classList.contains("is-ready")) {
+          document.documentElement.classList.remove("is-booting");
+          document.documentElement.classList.add("is-ready");
+          document.documentElement.style.setProperty("--boot-ready", "1");
+        }
+      }, 8000);
+    </script>
   </head>
   <body>
     <slot />
     <script>
       import { initScrollAnimations } from "../scripts/scroll";
-      initScrollAnimations();
+      // Defer scroll reveals until the boot splash has cleared so the hero
+      // copy doesn't animate in underneath the loader.
+      const start = () => initScrollAnimations();
+      if (document.documentElement.classList.contains("is-ready")) {
+        start();
+      } else {
+        const obs = new MutationObserver(() => {
+          if (document.documentElement.classList.contains("is-ready")) {
+            obs.disconnect();
+            start();
+          }
+        });
+        obs.observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ["class"],
+        });
+      }
     </script>
   </body>
 </html>

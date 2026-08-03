@@ -59,7 +59,9 @@ deploy.
 
 - [x] glTF product mesh (Khronos Duck placeholder; swap for a custom Blender sculpt anytime)
 - [x] Scroll-scrubbed cinematic camera in the sticky hero
-- [ ] Custom shaders: soft-rubber subsurface look, water caustics under the duck
+- [x] Soft-rubber SSS shader (`SoftRubberMaterial.ts` via `onBeforeCompile`)
+- [x] Loading orchestration (preload + branded boot splash + deferred scroll reveals)
+- [ ] Water caustics under the duck / stronger environment lighting
 - [ ] Gaussian-splat scanned hero variant (Spark / gsplat.js) like the reference site
 - [ ] Rive state-machine micro-animations for 2D gags
-- [ ] Loading orchestration, ktx2 texture compression, reduced-motion & mobile fallbacks
+- [ ] ktx2 texture compression, stronger mobile DPR / reduced-motion fallbacks

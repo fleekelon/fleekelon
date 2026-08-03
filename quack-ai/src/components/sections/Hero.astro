@@ -32,8 +32,8 @@ import DuckScene from "../three/DuckScene";
     </div>
 
     <div
-      class="pointer-events-none relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-end px-6 pb-16"
-      style="opacity: calc(1 - min(1, var(--cine-p, 0) / 0.35)); transform: translateY(calc(var(--cine-p, 0) * -48px));"
+      class="pointer-events-none relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-end px-6 pb-16 transition-opacity duration-700"
+      style="opacity: calc(var(--boot-ready, 0) * (1 - min(1, var(--cine-p, 0) / 0.35))); transform: translateY(calc(var(--cine-p, 0) * -48px));"
     >
       <p class="eyebrow mb-4">为 bug 而生 · 为桌面而造</p>
       <h1 class="h-hero max-w-4xl">
@@ -55,9 +55,9 @@ import DuckScene from "../three/DuckScene";
     </div>
 
     <div
-      class="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 font-mono text-xs tracking-[0.3em] text-cream-dim"
+      class="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 font-mono text-xs tracking-[0.3em] text-cream-dim transition-opacity duration-700"
       aria-hidden="true"
-      style="opacity: calc(1 - min(1, var(--cine-p, 0) / 0.2));"
+      style="opacity: calc(var(--boot-ready, 0) * (1 - min(1, var(--cine-p, 0) / 0.2)));"
     >
       <span class="inline-block animate-bounce">↓ 滚动观看</span>
     </div>

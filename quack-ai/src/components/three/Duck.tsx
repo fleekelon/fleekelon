@@ -1,20 +1,9 @@
 import { useEffect, useMemo, useRef, type RefObject } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Center, useGLTF } from "@react-three/drei";
-import {
-  Color,
-  MeshPhysicalMaterial,
-  type Group,
-  type Mesh,
-  type Object3D,
-  type Texture,
-} from "three";
-
-const BODY_YELLOW = new Color("#ffc400");
-const SHEEN = new Color("#fff2c0");
-
-/** Respect Astro/Vite `base` (e.g. "/fleekelon/" on GitHub Pages). */
-const DUCK_URL = `${import.meta.env.BASE_URL}models/duck.glb`;
+import type { Group, Mesh, Object3D, Texture } from "three";
+import { createSoftRubberMaterial } from "./SoftRubberMaterial";
+import { DUCK_MODEL_URL } from "./loadStore";
 
 export type DuckPose = { y: number; scale: number };
 
@@ -25,13 +14,12 @@ type DuckProps = {
 };
 
 /**
- * Khronos sample Duck glTF, materials upgraded to a clearcoated soft-rubber
- * look at runtime. Pointer tilt + scroll-driven yaw/scale live on the outer
- * group so the mesh itself stays untouched.
+ * Khronos sample Duck glTF, re-skinned with the soft-rubber SSS material.
+ * Pointer tilt + scroll-driven yaw/scale live on the outer group.
  */
 export function Duck({ pointer, pose }: DuckProps) {
   const group = useRef<Group>(null);
-  const { scene } = useGLTF(DUCK_URL);
+  const { scene } = useGLTF(DUCK_MODEL_URL);
 
   const prepared = useMemo(() => {
     const root = scene.clone(true);
@@ -50,17 +38,14 @@ export function Duck({ pointer, pose }: DuckProps) {
           map = candidate as Texture;
         }
       }
-      mesh.material = new MeshPhysicalMaterial({
-        // Preserve the baked albedo when present; otherwise brand yellow.
-        color: map ? new Color("#ffffff") : BODY_YELLOW,
+      mesh.material = createSoftRubberMaterial({
+        color: "#ffc400",
         map,
-        roughness: 0.32,
-        metalness: 0,
-        clearcoat: 0.95,
-        clearcoatRoughness: 0.28,
-        sheen: 0.55,
-        sheenRoughness: 0.4,
-        sheenColor: SHEEN,
+        subsurfaceColor: "#ff6a00",
+        wrap: 0.42,
+        strength: 0.68,
+        power: 3.0,
+        distortion: 0.2,
       });
       mesh.castShadow = true;
       mesh.receiveShadow = true;
@@ -105,7 +90,6 @@ export function Duck({ pointer, pose }: DuckProps) {
 
   return (
     <group ref={group} position={[0, -0.35, 0]}>
-      {/* Khronos duck is ~authored in cm; Center + scale brings it to hero size. */}
       <Center>
         <primitive object={prepared} scale={2.35} />
       </Center>
@@ -113,4 +97,4 @@ export function Duck({ pointer, pose }: DuckProps) {
   );
 }
 
-useGLTF.preload(DUCK_URL);
+useGLTF.preload(DUCK_MODEL_URL);
