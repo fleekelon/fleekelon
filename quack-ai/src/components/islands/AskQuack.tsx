@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Turn {
   role: "user" | "duck";
@@ -15,6 +15,13 @@ export default function AskQuack() {
     { role: "duck", text: "呱。(随便问。答案我早就知道了。)" },
   ]);
   const [thinking, setThinking] = useState(false);
+  const replyTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (replyTimer.current !== null) clearTimeout(replyTimer.current);
+    };
+  }, []);
 
   function send() {
     const prompt = input.trim();
@@ -22,7 +29,8 @@ export default function AskQuack() {
     setInput("");
     setTurns((t) => [...t, { role: "user", text: prompt }]);
     setThinking(true);
-    window.setTimeout(() => {
+    replyTimer.current = setTimeout(() => {
+      replyTimer.current = null;
       setTurns((t) => [...t, { role: "duck", text: "呱。" }]);
       setThinking(false);
     }, 900);

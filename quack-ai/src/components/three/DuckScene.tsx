@@ -1,4 +1,12 @@
-import { Suspense, useEffect, useRef, type RefObject } from "react";
+import {
+  Component,
+  Suspense,
+  useEffect,
+  useRef,
+  type ErrorInfo,
+  type ReactNode,
+  type RefObject,
+} from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { ContactShadows, Sparkles, useGLTF } from "@react-three/drei";
 import gsap from "gsap";
@@ -8,7 +16,8 @@ import { Duck } from "./Duck";
 import { CameraRig } from "./CameraRig";
 import { ProgressBridge, SceneReady } from "./ProgressBridge";
 import LoaderOverlay from "./LoaderOverlay";
-import { DUCK_MODEL_URL } from "./loadStore";
+import CinematicFallback from "./CinematicFallback";
+import { DUCK_MODEL_URL, forceBootComplete } from "./loadStore";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -41,6 +50,29 @@ function FollowLight({
       decay={2}
     />
   );
+}
+
+type BoundaryState = { failed: boolean };
+
+/** Catch React / R3F render failures without ditching the launch aesthetic. */
+class HeroBoundary extends Component<
+  { children: ReactNode; onFail: () => void },
+  BoundaryState
+> {
+  state: BoundaryState = { failed: false };
+
+  static getDerivedStateFromError(): BoundaryState {
+    return { failed: true };
+  }
+
+  componentDidCatch(_error: Error, _info: ErrorInfo): void {
+    this.props.onFail();
+  }
+
+  render() {
+    if (this.state.failed) return <CinematicFallback />;
+    return this.props.children;
+  }
 }
 
 /**
@@ -76,65 +108,79 @@ export default function DuckScene() {
   return (
     <div className="relative h-full w-full">
       <LoaderOverlay />
-      <div
-        className="h-full w-full"
-        aria-hidden="true"
-        onPointerMove={(e) => {
-          const rect = e.currentTarget.getBoundingClientRect();
-          pointer.current.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-          pointer.current.y = ((e.clientY - rect.top) / rect.height) * 2 - 1;
-        }}
-      >
-        <Canvas
-          camera={{ position: [0, 0.55, 5.0], fov: 36 }}
-          dpr={[1, 1.75]}
-          gl={{
-            antialias: true,
-            alpha: true,
-            powerPreference: "high-performance",
+      <HeroBoundary onFail={forceBootComplete}>
+        <div
+          className="h-full w-full"
+          aria-hidden="true"
+          onPointerMove={(e) => {
+            const rect = e.currentTarget.getBoundingClientRect();
+            pointer.current.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+            pointer.current.y = ((e.clientY - rect.top) / rect.height) * 2 - 1;
           }}
         >
-          <fog attach="fog" args={["#0d0c09", 6.5, 13]} />
-          <ambientLight intensity={0.4} />
-          <directionalLight
-            position={[4, 6, 3]}
-            intensity={2.5}
-            color="#fff4dc"
-          />
-          <directionalLight
-            position={[-5, 2, -4]}
-            intensity={1.15}
-            color="#ffc400"
-          />
-          <pointLight position={[0, 3, -5]} intensity={2.4} color="#ff9d33" />
-          <pointLight position={[0, -2, 4]} intensity={0.55} color="#ff8a00" />
-          <FollowLight pointer={pointer} />
-
-          <CameraRig progress={progress} duckPose={duckPose} />
-          <ProgressBridge />
-
-          <Suspense fallback={null}>
-            <SceneReady />
-            <Duck pointer={pointer} pose={duckPose} />
-            <Sparkles
-              count={110}
-              scale={[9, 5, 6]}
-              size={2.4}
-              speed={0.28}
-              opacity={0.55}
-              color="#ffdd66"
+          <Canvas
+            camera={{ position: [0, 0.55, 5.0], fov: 36 }}
+            dpr={[1, 1.75]}
+            gl={{
+              antialias: true,
+              alpha: true,
+              powerPreference: "high-performance",
+            }}
+            onCreated={({ gl }) => {
+              const el = gl.domElement;
+              const onLost = (ev: Event) => {
+                ev.preventDefault();
+                forceBootComplete();
+              };
+              el.addEventListener("webglcontextlost", onLost, false);
+            }}
+          >
+            <fog attach="fog" args={["#0d0c09", 6.5, 13]} />
+            <ambientLight intensity={0.4} />
+            <directionalLight
+              position={[4, 6, 3]}
+              intensity={2.5}
+              color="#fff4dc"
             />
-            <ContactShadows
-              position={[0, -1.35, 0]}
-              opacity={0.62}
-              scale={10}
-              blur={2.8}
-              far={3.2}
-              color="#000000"
+            <directionalLight
+              position={[-5, 2, -4]}
+              intensity={1.15}
+              color="#ffc400"
             />
-          </Suspense>
-        </Canvas>
-      </div>
+            <pointLight position={[0, 3, -5]} intensity={2.4} color="#ff9d33" />
+            <pointLight
+              position={[0, -2, 4]}
+              intensity={0.55}
+              color="#ff8a00"
+            />
+            <FollowLight pointer={pointer} />
+
+            <CameraRig progress={progress} duckPose={duckPose} />
+            <ProgressBridge />
+
+            <Suspense fallback={null}>
+              <SceneReady />
+              <Duck pointer={pointer} pose={duckPose} />
+              <Sparkles
+                count={110}
+                scale={[9, 5, 6]}
+                size={2.4}
+                speed={0.28}
+                opacity={0.55}
+                color="#ffdd66"
+              />
+              <ContactShadows
+                position={[0, -1.35, 0]}
+                opacity={0.62}
+                scale={10}
+                blur={2.8}
+                far={3.2}
+                color="#000000"
+              />
+            </Suspense>
+          </Canvas>
+        </div>
+      </HeroBoundary>
     </div>
   );
 }
