@@ -47,9 +47,13 @@ Stable production deploy (GitHub Pages):
 
 **https://fleekelon.github.io/fleekelon/**
 
-Enabled by `.github/workflows/deploy-quack-ai.yml`. If the link 404s the first
-time, open the repo **Settings → Pages → Source → GitHub Actions** once, then
-re-run the workflow (or push any change under `quack-ai/`).
+The workflow (`.github/workflows/deploy-quack-ai.yml`) publishes the built site
+to the `gh-pages` branch on every push that touches `quack-ai/`.
+
+**First-time enable (one click):** repo **Settings → Pages → Build and
+deployment → Source → Deploy from a branch → Branch `gh-pages` / folder `/
+(root)` → Save**. After that the URL above stays live and updates on each
+deploy.
 
 ## Roadmap (further polish)
 
