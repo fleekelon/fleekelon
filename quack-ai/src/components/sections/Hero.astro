@@ -2,46 +2,77 @@
 import DuckScene from "../three/DuckScene";
 ---
 
-<section id="top" class="relative flex min-h-svh flex-col overflow-hidden">
-  <!-- Ambient glow + giant watermark behind the 3D scene. -->
+<!--
+  Cinematic sticky intro.
+  The outer #cine is ~280vh tall; the inner viewport sticks to the top while
+  the user scrolls, and DuckScene scrubs a camera path against that progress.
+  --cine-p (0..1) is published as a CSS var for copy fade / watermark motion.
+-->
+<section id="cine" class="relative h-[280vh]">
   <div
-    class="glow top-1/4 left-1/2 h-[42rem] w-[42rem] -translate-x-1/2 -translate-y-1/4"
+    id="top"
+    class="sticky top-0 flex h-svh flex-col overflow-hidden"
   >
-  </div>
-  <div
-    class="ghost-title absolute top-16 left-1/2 -translate-x-1/2 md:top-10"
-    aria-hidden="true"
-  >
-    QUACK-1
-  </div>
+    <div
+      class="glow top-1/4 left-1/2 h-[42rem] w-[42rem] -translate-x-1/2 -translate-y-1/4"
+      style="opacity: calc(1 - var(--cine-p, 0) * 0.55);"
+    >
+    </div>
 
-  <div class="absolute inset-0">
-    <DuckScene client:only="react" />
-  </div>
+    <div
+      class="ghost-title absolute top-16 left-1/2 -translate-x-1/2 md:top-10"
+      aria-hidden="true"
+      style="transform: translate(-50%, calc(var(--cine-p, 0) * -40px)); opacity: calc(0.9 - var(--cine-p, 0) * 0.85);"
+    >
+      QUACK-1
+    </div>
 
-  <div
-    class="pointer-events-none relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-end px-6 pb-16"
-  >
-    <p class="eyebrow mb-4" data-reveal>为 bug 而生 · 为桌面而造</p>
-    <h1 class="h-hero max-w-4xl" data-reveal>
-      全世界最没必要<br />这么精致的<span class="text-accent">橡皮鸭</span>。
-    </h1>
-    <div class="mt-8 flex flex-wrap items-center gap-6" data-reveal>
-      <p class="max-w-md text-sm leading-relaxed text-cream-dim">
-        它会倾听,会漂浮,会以恰到好处的方式审视你的代码。QUACK
-        让最孤独的调试时刻,也像经过了同行评审。
-      </p>
-      <a href="#model" class="btn-ghost pointer-events-auto">认识 QUACK-1</a>
+    <div class="absolute inset-0">
+      <DuckScene client:only="react" />
+    </div>
+
+    <div
+      class="pointer-events-none relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-end px-6 pb-16"
+      style="opacity: calc(1 - min(1, var(--cine-p, 0) / 0.35)); transform: translateY(calc(var(--cine-p, 0) * -48px));"
+    >
+      <p class="eyebrow mb-4">为 bug 而生 · 为桌面而造</p>
+      <h1 class="h-hero max-w-4xl">
+        全世界最没必要<br />这么精致的<span class="text-accent">橡皮鸭</span>。
+      </h1>
+      <div class="mt-8 flex flex-wrap items-center gap-6">
+        <p class="max-w-md text-sm leading-relaxed text-cream-dim">
+          它会倾听,会漂浮,会以恰到好处的方式审视你的代码。QUACK
+          让最孤独的调试时刻,也像经过了同行评审。
+        </p>
+        <a href="#model" class="btn-ghost pointer-events-auto">认识 QUACK-1</a>
+      </div>
+    </div>
+
+    <div
+      class="scrim pointer-events-none absolute inset-x-0 bottom-0 h-40"
+      style="opacity: calc(0.85 + var(--cine-p, 0) * 0.15);"
+    >
+    </div>
+
+    <div
+      class="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 font-mono text-xs tracking-[0.3em] text-cream-dim"
+      aria-hidden="true"
+      style="opacity: calc(1 - min(1, var(--cine-p, 0) / 0.2));"
+    >
+      <span class="inline-block animate-bounce">↓ 滚动观看</span>
     </div>
   </div>
-
-  <div class="scrim pointer-events-none absolute inset-x-0 bottom-0 h-40"></div>
-
-  <!-- Scroll cue -->
-  <div
-    class="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 animate-bounce font-mono text-xs tracking-[0.3em] text-cream-dim"
-    aria-hidden="true"
-  >
-    ↓
-  </div>
 </section>
+
+<style>
+  /* Ensure --cine-p has a unitless default before JS hydrates. */
+  #cine {
+    --cine-p: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #cine {
+      height: 100svh;
+    }
+  }
+</style>

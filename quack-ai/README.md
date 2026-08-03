@@ -7,8 +7,8 @@ product, and the "model" are original to this repo — nothing is taken from Lus
 ## Stack
 
 - **Astro 7** — static shell, sections as `.astro` components, interactivity as islands
-- **React 19 + React Three Fiber + drei** — WebGL hero scene (procedural duck, pointer parallax)
-- **GSAP + ScrollTrigger** — scroll reveal / stagger / counter system (`src/scripts/scroll.ts`)
+- **React 19 + React Three Fiber + drei** — WebGL hero (Khronos Duck glTF + clearcoat materials)
+- **GSAP + ScrollTrigger** — scroll reveal / stagger / counter system, plus cinematic camera scrub
 - **Tailwind CSS 4** — design tokens live in `src/styles/global.css` under `@theme`
 
 ## Architecture
@@ -22,7 +22,12 @@ src/
   components/
     sections/*.astro          static sections (server-rendered, zero JS)
     islands/*.tsx             interactive React islands (chat gag, temperature lab, cipher)
-    three/*.tsx               R3F scene + procedural duck mesh
+    three/
+      DuckScene.tsx           Canvas + sticky-hero ScrollTrigger → --cine-p
+      CameraRig.tsx           scrubbed camera / duck pose from scroll progress
+      Duck.tsx                glTF loader + clearcoat material override
+      scrollProgress.ts       camera keyframe table + lerp
+public/models/duck.glb        Khronos sample Duck (see ATTRIBUTION.md)
 ```
 
 ## Commands
@@ -35,11 +40,11 @@ npm run preview   # serve the build
 npm run check     # astro check (type-checks .astro + .tsx)
 ```
 
-## Roadmap (the "打磨" phase)
+## Roadmap (further polish)
 
-- Replace the primitive-based duck with a sculpted glTF model (Blender), draco-compressed
-- Custom shaders: soft-rubber subsurface look, water caustics under the duck
-- Gaussian-splat scanned hero variant (Spark / gsplat.js) like the reference site
-- Rive state-machine micro-animations for 2D gags
-- Scroll-scrubbed camera moves per section (ScrollTrigger timeline driving the R3F camera)
-- Loading orchestration, ktx2 texture compression, reduced-motion & mobile fallbacks
+- [x] glTF product mesh (Khronos Duck placeholder; swap for a custom Blender sculpt anytime)
+- [x] Scroll-scrubbed cinematic camera in the sticky hero
+- [ ] Custom shaders: soft-rubber subsurface look, water caustics under the duck
+- [ ] Gaussian-splat scanned hero variant (Spark / gsplat.js) like the reference site
+- [ ] Rive state-machine micro-animations for 2D gags
+- [ ] Loading orchestration, ktx2 texture compression, reduced-motion & mobile fallbacks
