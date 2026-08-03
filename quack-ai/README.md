@@ -34,11 +34,22 @@ public/models/duck.glb        Khronos sample Duck (see ATTRIBUTION.md)
 
 ```bash
 npm install
-npm run dev       # dev server on :4321
-npm run build     # static build to dist/
-npm run preview   # serve the build
-npm run check     # astro check (type-checks .astro + .tsx)
+npm run dev          # dev server on :4321
+npm run build        # static build to dist/ (base "/")
+npm run build:pages  # build with base "/fleekelon/" for GitHub Pages
+npm run preview      # serve the build
+npm run check        # astro check (type-checks .astro + .tsx)
 ```
+
+## Public URL
+
+Stable production deploy (GitHub Pages):
+
+**https://fleekelon.github.io/fleekelon/**
+
+Enabled by `.github/workflows/deploy-quack-ai.yml`. If the link 404s the first
+time, open the repo **Settings → Pages → Source → GitHub Actions** once, then
+re-run the workflow (or push any change under `quack-ai/`).
 
 ## Roadmap (further polish)
 

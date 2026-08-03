@@ -13,6 +13,9 @@ import {
 const BODY_YELLOW = new Color("#ffc400");
 const SHEEN = new Color("#fff2c0");
 
+/** Respect Astro/Vite `base` (e.g. "/fleekelon/" on GitHub Pages). */
+const DUCK_URL = `${import.meta.env.BASE_URL}models/duck.glb`;
+
 export type DuckPose = { y: number; scale: number };
 
 type DuckProps = {
@@ -28,7 +31,7 @@ type DuckProps = {
  */
 export function Duck({ pointer, pose }: DuckProps) {
   const group = useRef<Group>(null);
-  const { scene } = useGLTF("/models/duck.glb");
+  const { scene } = useGLTF(DUCK_URL);
 
   const prepared = useMemo(() => {
     const root = scene.clone(true);
@@ -110,4 +113,4 @@ export function Duck({ pointer, pose }: DuckProps) {
   );
 }
 
-useGLTF.preload("/models/duck.glb");
+useGLTF.preload(DUCK_URL);

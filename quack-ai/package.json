@@ -10,6 +10,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
+    "build:pages": "ASTRO_BASE=/fleekelon/ astro build",
     "preview": "astro preview",
     "check": "astro check"
   },
