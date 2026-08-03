@@ -48,7 +48,8 @@ export function Duck({ pointer, pose }: DuckProps) {
         }
       }
       mesh.material = new MeshPhysicalMaterial({
-        color: BODY_YELLOW,
+        // Preserve the baked albedo when present; otherwise brand yellow.
+        color: map ? new Color("#ffffff") : BODY_YELLOW,
         map,
         roughness: 0.32,
         metalness: 0,
