@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 const PRESETS = [
-  { label: 'Deterministic', t: '0.1', output: 'Quack' },
-  { label: 'Balanced', t: '1', output: 'Quack.' },
-  { label: 'Creative', t: '10', output: 'Quack?!' },
+  { label: "Deterministic", t: "0.1", output: "Quack" },
+  { label: "Balanced", t: "1", output: "Quack." },
+  { label: "Creative", t: "10", output: "Quack?!" },
 ] as const;
 
 /**
@@ -12,7 +12,7 @@ const PRESETS = [
  */
 export default function TemperatureLab() {
   const [index, setIndex] = useState(1);
-  const preset = PRESETS[index]!;
+  const preset = PRESETS[index] ?? PRESETS[1];
 
   return (
     <div className="card p-6">
@@ -33,7 +33,7 @@ export default function TemperatureLab() {
             key={p.label}
             type="button"
             onClick={() => setIndex(i)}
-            className={i === index ? 'text-accent' : ''}
+            className={i === index ? "text-accent" : ""}
           >
             {p.label} T={p.t}
           </button>
@@ -43,7 +43,8 @@ export default function TemperatureLab() {
         <p className="text-cream-dim">sample(prompt, temperature={preset.t})</p>
         <p className="mt-2 text-2xl text-accent">“{preset.output}”</p>
         <p className="mt-3 text-xs text-cream-dim">
-          Output variance: 0.00 · Confidence: 100% · Hallucination rate: n/a (it is a duck)
+          Output variance: 0.00 · Confidence: 100% · Hallucination rate: n/a (it
+          is a duck)
         </p>
       </div>
     </div>

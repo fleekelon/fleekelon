@@ -5,7 +5,14 @@ import tseslint from "typescript-eslint";
 
 export default tseslint.config(
   {
-    ignores: ["dist/**", "coverage/**", "node_modules/**"],
+    ignores: [
+      "dist/**",
+      "coverage/**",
+      "node_modules/**",
+      "quack-ai/dist/**",
+      "quack-ai/.astro/**",
+      "quack-ai/node_modules/**",
+    ],
   },
   js.configs.recommended,
   ...tseslint.configs.recommendedTypeChecked,

@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 /*
  * QUACK AI design system.
@@ -21,8 +21,9 @@
   --color-pond-soft: #3f6b5f;
   --color-pond-light: #d9f0e2;
 
-  --font-display: 'Space Grotesk Variable', 'Space Grotesk', system-ui, sans-serif;
-  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+  --font-display:
+    "Space Grotesk Variable", "Space Grotesk", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
 
   --radius-card: 1rem;
 }
@@ -83,7 +84,11 @@ body {
 }
 
 .scrim {
-  background: linear-gradient(180deg, rgb(13 12 9 / 0) 0%, rgb(13 12 9 / 0.92) 100%);
+  background: linear-gradient(
+    180deg,
+    rgb(13 12 9 / 0) 0%,
+    rgb(13 12 9 / 0.92) 100%
+  );
 }
 
 .btn-primary {
