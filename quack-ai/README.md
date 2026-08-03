@@ -43,6 +43,9 @@ npm run check        # astro check (type-checks .astro + .tsx)
 
 ## Public URL
 
+**Primary (Vercel):** https://quack-ai-nu.vercel.app/
+
+
 Stable production deploy (GitHub Pages):
 
 **https://fleekelon.github.io/fleekelon/**
