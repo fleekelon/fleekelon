@@ -85,22 +85,36 @@ export function createSoftRubberMaterial(
         // Wrap diffuse softens the terminator; backscatter lights the
         // opposite lobe with the warm subsurface colour so edges glow
         // like thin vinyl under desk lamps.
+        //
+        // Temps are declared OUTSIDE the unrolled loops — three.js
+        // unroll_loop pragmas inline iterations into one scope, so
+        // per-iteration local declarations would error as redefinitions.
         {
           vec3 sssN = geometryNormal;
           vec3 sssView = normalize( geometryViewDir );
           vec3 sssAccum = vec3( 0.0 );
+          vec3 sssL;
+          vec3 sssLightColor;
+          vec3 sssScatterDir;
+          vec3 sssLVector;
+          float sssNdotL;
+          float sssWrapDiffuse;
+          float sssVdotScatter;
+          float sssScatter;
+          float sssLightDistance;
+          float sssAttenuation;
 
           #if ( NUM_DIR_LIGHTS > 0 )
             #pragma unroll_loop_start
             for ( int i = 0; i < NUM_DIR_LIGHTS; i ++ ) {
-              vec3 L = directionalLights[ i ].direction;
-              vec3 lightColor = directionalLights[ i ].color;
-              float NdotL = dot( sssN, L );
-              float wrapDiffuse = saturate( ( NdotL + uWrap ) / ( 1.0 + uWrap ) );
-              vec3 scatterDir = normalize( L + sssN * uSSSDistortion );
-              float VdotScatter = saturate( dot( sssView, -scatterDir ) );
-              float scatter = pow( VdotScatter, uSSSPower ) * uSSSStrength;
-              sssAccum += lightColor * ( wrapDiffuse * 0.18 + scatter ) * uSubsurfaceColor;
+              sssL = directionalLights[ i ].direction;
+              sssLightColor = directionalLights[ i ].color;
+              sssNdotL = dot( sssN, sssL );
+              sssWrapDiffuse = saturate( ( sssNdotL + uWrap ) / ( 1.0 + uWrap ) );
+              sssScatterDir = normalize( sssL + sssN * uSSSDistortion );
+              sssVdotScatter = saturate( dot( sssView, -sssScatterDir ) );
+              sssScatter = pow( sssVdotScatter, uSSSPower ) * uSSSStrength;
+              sssAccum += sssLightColor * ( sssWrapDiffuse * 0.18 + sssScatter ) * uSubsurfaceColor;
             }
             #pragma unroll_loop_end
           #endif
@@ -108,20 +122,20 @@ export function createSoftRubberMaterial(
           #if ( NUM_POINT_LIGHTS > 0 )
             #pragma unroll_loop_start
             for ( int i = 0; i < NUM_POINT_LIGHTS; i ++ ) {
-              vec3 lVector = pointLights[ i ].position - geometryPosition;
-              float lightDistance = length( lVector );
-              vec3 L = lVector / max( lightDistance, 1e-4 );
-              float attenuation = getDistanceAttenuation(
-                lightDistance,
+              sssLVector = pointLights[ i ].position - geometryPosition;
+              sssLightDistance = length( sssLVector );
+              sssL = sssLVector / max( sssLightDistance, 1e-4 );
+              sssAttenuation = getDistanceAttenuation(
+                sssLightDistance,
                 pointLights[ i ].distance,
                 pointLights[ i ].decay
               );
-              float NdotL = dot( sssN, L );
-              float wrapDiffuse = saturate( ( NdotL + uWrap ) / ( 1.0 + uWrap ) );
-              vec3 scatterDir = normalize( L + sssN * uSSSDistortion );
-              float VdotScatter = saturate( dot( sssView, -scatterDir ) );
-              float scatter = pow( VdotScatter, uSSSPower ) * uSSSStrength * 0.65;
-              sssAccum += pointLights[ i ].color * attenuation * ( wrapDiffuse * 0.12 + scatter ) * uSubsurfaceColor;
+              sssNdotL = dot( sssN, sssL );
+              sssWrapDiffuse = saturate( ( sssNdotL + uWrap ) / ( 1.0 + uWrap ) );
+              sssScatterDir = normalize( sssL + sssN * uSSSDistortion );
+              sssVdotScatter = saturate( dot( sssView, -sssScatterDir ) );
+              sssScatter = pow( sssVdotScatter, uSSSPower ) * uSSSStrength * 0.65;
+              sssAccum += pointLights[ i ].color * sssAttenuation * ( sssWrapDiffuse * 0.12 + sssScatter ) * uSubsurfaceColor;
             }
             #pragma unroll_loop_end
           #endif
